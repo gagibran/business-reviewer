@@ -1,0 +1,10 @@
+@import './reset';
+@import './commons';
+
+body {
+    font-family: 'Work Sans', sans-serif;
+}
+
+#root {
+    @include display-flex(column, center, center);
+}

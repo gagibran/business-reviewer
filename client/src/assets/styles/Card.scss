@@ -1,0 +1,41 @@
+@import './commons';
+
+.card {
+    @include display-flex(column, center, center);
+    transform: translateY(0);
+    transition: transform $transition-time;
+    border-radius: 10px;
+    background-color: get-color('secondary');
+    padding: 10px;
+    width: 320px;
+    height: 250px;
+        @media (max-width: get-screen-size('extra-large')){
+            width: 330px;
+            height: 300px;
+        }
+        @media (max-width: get-screen-size('large')){
+            width: 360px;
+            height: 320px;
+        }
+        @media (max-width: get-screen-size('small')){
+            width: 90vw;
+            height: 400px;
+        }
+    
+    &:hover {
+        transform: translateY(-10px);
+        transition: transform $transition-time;
+    }
+
+    #{&}__title {
+        text-align: center;
+        font-weight: get-font-weight('subtitle');
+        margin: 5px 0;
+    }
+
+    #{&}__description {
+        text-align: center;
+        font-weight: get-font-weight('description');
+        margin: 5px 0;
+    }
+}

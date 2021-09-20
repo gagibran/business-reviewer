@@ -1,0 +1,6 @@
+@import './commons';
+
+main {
+    @include display-flex(column, center, center);
+    padding: 5% 0;
+}

@@ -1,0 +1,25 @@
+@import './commons';
+
+.resume-preview {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    #{&}__link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: get-layer('top');
+        width: inherit;
+        height: inherit;
+        opacity: 0;
+    }
+
+    #{&}__preview {
+        height: inherit;
+        width: inherit;
+        border-radius: 10px;
+    }
+
+
+}

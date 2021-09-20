@@ -1,0 +1,67 @@
+$transition-time: 0.2s;
+
+// TODO: Create a color pallet.
+$colors: (
+    'primary': black,
+    'secondary': grey
+);
+
+$screen-sizes: (
+    'extra-extra-small': 535px,
+    'extra-small': 600px,
+    'small': 800px,
+    'medium': 990px,
+    'large': 1145px,
+    'extra-large': 1485px,
+    'extra-extra-large': 2000px,
+);
+
+$font-weights: (
+    'title': 900,
+    'subtitle': 700,
+    'description': 400
+);
+
+$font-sizes: (
+    'title': 4rem,
+    'subtitle': 2rem,
+    'description': 1.3rem
+);
+
+$layers: (
+    'top': 2,
+    'middle': 1,
+    'bottom': -1
+);
+
+@function get-color($color) {
+    @return map-get($colors, $color);
+};
+
+@function get-screen-size($size) {
+    @return map-get($screen-sizes, $size);
+};
+
+@function get-font-size($size) {
+    @return map-get($font-sizes, $size);
+};
+
+@function get-font-weight($weight) {
+    @return map-get($font-weights, $weight);
+};
+
+@function get-layer($layer) {
+    @return map-get($layers, $layer);
+};
+
+@mixin display-flex($direction, $content-align, $items-align) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $content-align;
+    justify-items: $items-align;
+};
+
+@mixin grid-alignment($row-axis, $column-axis) {
+    justify-items: $row-axis;
+    align-items: $column-axis;
+};

@@ -3,6 +3,7 @@
 
 body {
     font-family: 'Work Sans', sans-serif;
+    @include light;
 }
 
 #root {

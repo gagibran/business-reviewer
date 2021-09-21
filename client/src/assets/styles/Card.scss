@@ -5,37 +5,48 @@
     transform: translateY(0);
     transition: transform $transition-time;
     border-radius: 10px;
-    background-color: get-color('secondary');
-    padding: 10px;
     width: 320px;
-    height: 250px;
+    height: 300px;
         @media (max-width: get-screen-size('extra-large')){
             width: 330px;
-            height: 300px;
+            height: 320px;
         }
         @media (max-width: get-screen-size('large')){
             width: 360px;
-            height: 320px;
+            height: 340px;
         }
         @media (max-width: get-screen-size('small')){
             width: 90vw;
-            height: 400px;
+            height: 420px;
         }
-    
+    border: 1px solid;
+    box-shadow: -2px 3px 5px get-color('dark-secondary');
+
+    &--dark {
+        @include dark();
+    }
+
+    &--light {
+        @include light();
+    }
+
     &:hover {
         transform: translateY(-10px);
         transition: transform $transition-time;
     }
 
     #{&}__title {
-        text-align: center;
+        padding-left: 14%;
         font-weight: get-font-weight('subtitle');
-        margin: 5px 0;
+        margin: 15px 0;
+        font-size: get-font-size('card-title');
     }
 
     #{&}__description {
-        text-align: center;
+        padding-left: 14%;
         font-weight: get-font-weight('description');
-        margin: 5px 0;
+        margin: 15px 0;
+        color: get-color('light-secondary');
+        font-weight: get-font-weight('title');
     }
 }

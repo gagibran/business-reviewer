@@ -1,12 +1,12 @@
 import '../assets/styles/Main.scss'
 import Cards from './Cards'
 
-const Main = function () {
+function Main() {
     return (
         <main>
             <Cards />
         </main>
     );
-};
+}
 
 export default Main;

@@ -1,8 +1,8 @@
 import '../assets/styles/Cards.scss';
-import Card from './Card';
+import Card from './Card.jsx';
 import { useState } from 'react';
 
-const Cards = function () {
+function Cards() {
     const [resumes, setResumes] = useState(
         [
             {
@@ -15,13 +15,13 @@ const Cards = function () {
                 key: 2,
                 title: 'Test 2',
                 resumeSrc: 'https://nodejs.org/en/',
-                description: 'Testing 2'
+                description: ''
             },
             {
                 key: 3,
                 title: 'Test 3',
                 resumeSrc: 'https://nodejs.org/en/',
-                description: 'Testing 3'
+                description: ''
             },
             {
                 key: 4,
@@ -32,22 +32,25 @@ const Cards = function () {
         ]
     );
     return (
-        <section className='cards' id='resumes'>
-            <h1 className='cards__title'>My Resumes</h1>
-            <div className='cards__container'>
+        <section className="cards" id="resumes">
+            <h1 className="cards__title">My Resumes</h1>
+            <div className="cards__container">
                 {
                     resumes.map(resume => {
-                        return <Card className='card'
-                            key={resume.key}
-                            title={resume.title}
-                            resumeSrc={resume.resumeSrc}
-                            description={resume.description}
-                        />
+                        return (
+                            <Card
+                                className="card"
+                                key={resume.key}
+                                title={resume.title}
+                                resumeSrc={resume.resumeSrc}
+                                description={resume.description}
+                            />
+                        )
                     })
                 }
             </div>
         </section>
     );
-};
+}
 
 export default Cards;

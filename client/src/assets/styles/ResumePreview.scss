@@ -18,8 +18,7 @@
     #{&}__preview {
         height: inherit;
         width: inherit;
-        border-radius: 10px;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 3.5px 2px get-color('dark-secondary');
     }
-
-
 }

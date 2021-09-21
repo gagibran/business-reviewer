@@ -1,9 +1,10 @@
 $transition-time: 0.2s;
 
-// TODO: Create a color pallet.
 $colors: (
-    'primary': black,
-    'secondary': grey
+    'dark': #01050f,
+    'dark-secondary': #505153,
+    'light-secondary': #969690,
+    'light': #fcfcfc
 );
 
 $screen-sizes: (
@@ -25,6 +26,7 @@ $font-weights: (
 $font-sizes: (
     'title': 4rem,
     'subtitle': 2rem,
+    'card-title': 1.7rem,
     'description': 1.3rem
 );
 
@@ -65,3 +67,15 @@ $layers: (
     justify-items: $row-axis;
     align-items: $column-axis;
 };
+
+@mixin light() {
+    border-color: get-color('light-secondary');
+    color: get-color('dark');
+    background-color: get-color('light');
+}
+
+@mixin dark() {
+    border-color: get-color('dark-secondary');
+    color: get-color('light');
+    background-color: get-color('dark-secondary');
+}

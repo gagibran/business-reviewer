@@ -1,5 +1,0 @@
-.dockerignore
-dev.Dockerfile
-Dockerfile
-node_modules/
-README.md

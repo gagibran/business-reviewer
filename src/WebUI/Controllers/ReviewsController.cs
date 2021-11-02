@@ -4,7 +4,7 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Controllers
+namespace WebUI.Controllers
 {
     public class ReviewsController : BaseAPIController
     {

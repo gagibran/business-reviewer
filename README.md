@@ -1,2 +1,2 @@
-# Resume Builder
-An application that builds resumes.
+# Business Reviewer
+An application to review businesses.

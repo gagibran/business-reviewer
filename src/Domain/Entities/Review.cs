@@ -1,7 +1,6 @@
-using System;
-using Domain.Common;
+using BusinessReviewer.Domain.Common;
 
-namespace Domain.Entities
+namespace BusinessReviewer.Domain.Entities
 {
     public class Review : BaseEntity
     {

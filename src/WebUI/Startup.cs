@@ -1,4 +1,8 @@
-using Infrastructure.Data;
+using BusinessReviewer.Application.Common.Interfaces;
+using BusinessReviewer.Application.Reviews.Queries;
+using BusinessReviewer.Infrastructure;
+using BusinessReviewer.Infrastructure.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace WebUI
+namespace BusinessReviewer.WebUI
 {
     public class Startup
     {
@@ -33,6 +37,7 @@ namespace WebUI
                 }
             });
 
+
             // Ensuring that the front-wend can fetch the API:
             services.AddCors(options =>
             {
@@ -45,6 +50,10 @@ namespace WebUI
                     }
                 });
             });
+
+            services.AddScoped<IApplicationDBContext, ApplicationDBContext>();
+
+            services.AddMediatR(typeof(GetReviewsQueryHandler).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

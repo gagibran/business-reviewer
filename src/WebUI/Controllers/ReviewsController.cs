@@ -1,37 +1,61 @@
 using System;
 using System.Threading.Tasks;
-using Infrastructure.Data;
+using BusinessReviewer.Application.Reviews.Commands;
+using BusinessReviewer.Application.Reviews.Queries;
+using BusinessReviewer.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace WebUI.Controllers
+namespace BusinessReviewer.WebUI.Controllers
 {
     public class ReviewsController : BaseAPIController
     {
-        private readonly ApplicationDBContext _applicationDBContext;
-        public ReviewsController(ApplicationDBContext applicationDBContext)
+        private readonly IMediator _mediator;
+
+        public ReviewsController(IMediator mediator)
         {
-            _applicationDBContext = applicationDBContext;
+            _mediator = mediator;
         }
 
         // GET all reviews:
         [HttpGet]
         public async Task<IActionResult> GetReviewsAsync()
         {
-            var reviews = await _applicationDBContext.Reviews.ToListAsync();
+
+            // Queries the DB through MediatR:
+            var reviews = await _mediator.Send(new GetReviewsQuery());
             return Ok(reviews);
         }
 
         // GET single review based on its ID:
+        // The ActionName attribute is here because in CreateReviewAsync(), when we return
+        // CreatedAtAction(nameof(GetReviewAsync), new { id = reviewCreated.Id }, reviewCreated),
+        // .NET doesn't like the fact that the method ends with "Async", so it trims it.
+        // ActionName guarantees that "Async" doesn't get trimmed and it works in CreatedAtAction.
+        // More info: https://www.josephguadagno.net/2020/07/01/no-route-matches-the-supplied-values.
         [HttpGet("{id}")]
+        [ActionName(nameof(GetReviewAsync))]
         public async Task<IActionResult> GetReviewAsync(Guid id)
         {
-            var review = await _applicationDBContext.Reviews.FindAsync(id);
-            if (review == null)
-            {
-                return NotFound();
-            }
+            var review = await _mediator.Send(new GetReviewQuery { Id = id });
+
+            if (review is null) return NotFound();
+
             return Ok(review);
+        }
+
+        // POST a single review:
+        // We don't have to use the [FromBody] attribute before Review review here because
+        // we already put [ApiController] decorating BaseAPIController. This means that
+        // HttpPost is smart enough to know that the review argument will be passed as
+        // JSON and that it has to look inside the body for its properties.
+        [HttpPost]
+        public async Task<IActionResult> CreateReviewAsync(Review review)
+        {
+            var reviewCreated = await _mediator.Send(new CreateReviewCommand { Review = review });
+
+            // This method allows us to return the item and its GET URI (with a 201 status):
+            return CreatedAtAction(nameof(GetReviewAsync), new { id = reviewCreated.Id }, reviewCreated);
         }
     }
 }

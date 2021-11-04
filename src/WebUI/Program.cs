@@ -1,13 +1,13 @@
 using System;
 using System.Threading.Tasks;
-using Infrastructure.Data;
+using BusinessReviewer.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebUI
+namespace BusinessReviewer.WebUI
 {
     public class Program
     {
@@ -15,7 +15,8 @@ namespace WebUI
         {
             var host = CreateHostBuilder(args).Build();
 
-            #region Trying to create databases from migrations if they don't exist.
+            // Creates the databases (and their tables) from migrations if they don't exist.
+            // This replaces: dotnet ef database update.
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -31,7 +32,6 @@ namespace WebUI
                     logger.LogError(exception, "An error ocurred during migration.");
                 }
             }
-            #endregion
 
             await host.RunAsync();
         }

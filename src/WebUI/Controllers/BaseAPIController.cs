@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebUI.Controllers
+namespace BusinessReviewer.WebUI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

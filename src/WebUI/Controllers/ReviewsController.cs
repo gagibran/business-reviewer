@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using BusinessReviewer.Application.Common.Exceptions;
 using BusinessReviewer.Application.Reviews.Commands;
 using BusinessReviewer.Application.Reviews.Queries;
 using BusinessReviewer.Domain.Entities;
@@ -56,6 +57,36 @@ namespace BusinessReviewer.WebUI.Controllers
 
             // This method allows us to return the item and its GET URI (with a 201 status):
             return CreatedAtAction(nameof(GetReviewAsync), new { id = reviewCreated.Id }, reviewCreated);
+        }
+
+        // PUT a single review:
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateReviewAsync(Guid id, Review review)
+        {
+            try
+            {
+                await _mediator.Send(new UpdateReviewCommand { Id = id, Review = review });
+                return NoContent();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        // DELETE a single review:
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReviewAsync(Guid id)
+        {
+            try
+            {
+                await _mediator.Send(new DeleteReviewCommand { Id = id });
+                return NoContent();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }

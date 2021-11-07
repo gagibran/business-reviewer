@@ -1,6 +1,5 @@
 using BusinessReviewer.Application.Common.Interfaces;
 using BusinessReviewer.Application.Reviews.Queries;
-using BusinessReviewer.Infrastructure;
 using BusinessReviewer.Infrastructure.Data;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Application.Common.Mappings;
 
 namespace BusinessReviewer.WebUI
 {
@@ -37,8 +37,7 @@ namespace BusinessReviewer.WebUI
                 }
             });
 
-
-            // Ensuring that the front-wend can fetch the API:
+            // Ensuring that the front-end can fetch the API:
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", policy =>
@@ -53,7 +52,11 @@ namespace BusinessReviewer.WebUI
 
             services.AddScoped<IApplicationDBContext, ApplicationDBContext>();
 
+            // We need to specify the assembly where all of our queries are located:
             services.AddMediatR(typeof(GetReviewsQueryHandler).Assembly);
+
+            // We need to specify the assembly where all of our mapping profiles are located:
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

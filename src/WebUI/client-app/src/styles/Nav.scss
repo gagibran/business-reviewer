@@ -1,0 +1,24 @@
+@import 'common';
+
+.side-navbar {
+    @include flex-container(column);
+    border: 1px solid black;
+
+    #{&}__link {
+        display: block;
+        margin-bottom: 40px;
+    }
+
+    #{&}__profile-picture {
+        @include vertically-centered-block();
+        @include rounded-image(120px);
+        margin-bottom: 100px;
+    }
+
+    #{&}__logo {
+        @include vertically-centered-block();
+        width: 40%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}

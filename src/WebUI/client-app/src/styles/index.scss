@@ -1,0 +1,6 @@
+@import 'common';
+
+#root {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}

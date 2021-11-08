@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './components/Main';
-import './styles/index.css';
+import './styles/index.scss';
+import './styles/reset.scss';
 import reportWebVitals from './reportWebVitals';
+import Nav from './components/Nav';
+import Main from './components/Main';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Nav />
     <Main />
   </React.StrictMode>,
   document.getElementById('root')

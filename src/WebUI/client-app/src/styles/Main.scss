@@ -1,0 +1,10 @@
+@import 'common';
+
+.main-content {
+    @include flex-container(column);
+
+    #{&}__reviews a {
+        display: block;
+        margin-bottom: 40px;
+    }
+}

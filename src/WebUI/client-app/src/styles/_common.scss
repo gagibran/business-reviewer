@@ -1,0 +1,24 @@
+@mixin flex-container($direction: row, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin vertically-centered-block() {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin rounded-image($size) {
+    width: $size;
+    height: $size;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@font-face {
+    font-family: 'Catamaran';
+    src: url('../assets/fonts/Catamaran/Catamaran-VariableFont_wght.ttf');
+}

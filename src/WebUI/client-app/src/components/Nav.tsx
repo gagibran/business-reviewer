@@ -1,24 +1,29 @@
 import "../styles/Nav.scss";
-import logoImage from "../assets/images/logo225x230.png";
+import NavAction from "./NavAction";
+import { ProfileInfo } from "../interfaces/profileInfo";
+import { MdOutlineRateReview } from "react-icons/md";
+import { BiCog } from "react-icons/bi";
+import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
+import { useState } from "react";
 
-const Nav = function () {
+const Nav = function ({ userName, profilePictureSrc }: ProfileInfo) {
+    const [navbar, setNavbar] = useState(true);
+
+    window.matchMedia('(max-width: 840px)').addEventListener("change", () => {
+        return setNavbar(false);
+    });
+
     return (
-        <nav className="side-navbar">
-            <div className="side-navbar__links">
-                <img src={logoImage} alt="Logo"
-                    className="side-navbar__logo"
-                />
-                <img
-                    src="https://images.unsplash.com/photo-1619895862022-09114b41f16f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-                    alt="Profile"
-                    className="side-navbar__profile-picture"
-                />
-                <a href="https://google.com" className="side-navbar__link">test1</a>
-                <a href="https://google.com" className="side-navbar__link">test2</a>
-                <a href="https://google.com" className="side-navbar__link">test3</a>
-                <a href="https://google.com" className="side-navbar__link">test4</a>
-                <a href="https://google.com" className="side-navbar__link">test5</a>
-            </div>
+        <nav className={`side-navbar${!navbar ? ' deactivated' : ''}`}>
+            <AiOutlineArrowLeft className="side-navbar__arrow" onClick={() => setNavbar(!navbar)} />
+            <a className="side-navbar__brand" href="/"><span>Business Reviewer</span></a>
+            <hr className="side-navbar__separator" />
+            <img src={profilePictureSrc} alt={userName} className="side-navbar__profile-picture" />
+            <p className="side-navbar__user-name">{userName}</p>
+            <hr className="side-navbar__separator" />
+            <NavAction icon={<AiOutlineHome className="side-navbar__icon" />} actionRoute="/" actionName="Home" />
+            <NavAction icon={<MdOutlineRateReview className="side-navbar__icon" />} actionRoute="/" actionName="My Reviews" />
+            <NavAction icon={<BiCog className="side-navbar__icon" />} actionRoute="/" actionName="Settings" />
         </nav>
     );
 };

@@ -7,11 +7,7 @@ import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
 import { useState } from "react";
 
 const Nav = function ({ userName, profilePictureSrc }: ProfileInfo) {
-    const [navbar, setNavbar] = useState(true);
-
-    window.matchMedia('(max-width: 840px)').addEventListener("change", () => {
-        return setNavbar(false);
-    });
+    const [navbar, setNavbar] = useState(false);
 
     return (
         <nav className={`side-navbar${!navbar ? ' deactivated' : ''}`}>

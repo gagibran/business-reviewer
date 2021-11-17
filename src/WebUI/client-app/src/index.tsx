@@ -4,7 +4,7 @@ import './styles/index.scss';
 import './styles/reset.scss';
 import reportWebVitals from './reportWebVitals';
 import Nav from './components/Nav';
-import Main from './components/Main';
+import CustomMap from './components/CustomMap';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -13,7 +13,7 @@ ReactDOM.render(
             userEmail="joanna.johnson@example.com"
             profilePictureSrc="https://images.unsplash.com/photo-1619895862022-09114b41f16f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
         />
-        <Main />
+        <CustomMap />
     </React.StrictMode>,
     document.getElementById('root')
 );

@@ -1,0 +1,9 @@
+@import 'common';
+
+.map {
+    #{&}__map-container {
+        z-index: 1;
+        height: 100vh;
+        margin-left: 100px;
+    }
+}

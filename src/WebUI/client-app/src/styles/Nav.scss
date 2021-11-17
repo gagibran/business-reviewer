@@ -10,6 +10,7 @@
     background-color: get-color('dark-primary');
     color: get-color('light-primary');
     transition: width 0.5s;
+    z-index: 2;
 
     #{&}__arrow {
         padding: 5px;

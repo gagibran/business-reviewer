@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Review } from "../interfaces/review";
-import "../styles/Main.scss";
+import "../styles/Reviews.scss";
 
-const Main = function () {
+const Reviews = function () {
 
     // This is responsible for updating the reviews array on the page:
     // We're typing "reviews" to an array of the "Review" interface.
@@ -20,16 +20,14 @@ const Main = function () {
     }, []);
 
     return (
-        <main className="main-content">
-            <section id="reviews" className="main-content__reviews">
-                {reviews.map((review) => (
-                    <a href="https://google.com" key={review.id}>
-                        {review.businessName}
-                    </a>
-                ))}
-            </section>
+        <main id="reviews">
+            {reviews.map((review) => (
+                <a href="/" key={review.id}>
+                    {review.businessName}
+                </a>
+            ))}
         </main>
     );
 };
 
-export default Main;
+export default Reviews;

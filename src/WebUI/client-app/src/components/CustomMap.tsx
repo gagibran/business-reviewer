@@ -1,6 +1,9 @@
+// More information: https://github.com/PaulLeCam/react-leaflet#react-leaflet-
+
 import "../styles/CustomMap.scss";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
+import SearchAddress from "./SearchAddress";
 
 const CustomMap = function () {
     const getCoords = function () {
@@ -27,6 +30,7 @@ const CustomMap = function () {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                <SearchAddress />
             </MapContainer>
         </main>
     );

@@ -4,16 +4,7 @@ import { EsriProvider, GeoSearchControl } from "leaflet-geosearch"
 import { useEffect } from "react"
 import { useMap } from "react-leaflet"
 import "leaflet-geosearch/assets/css/leaflet.css"
-import { icon, Marker } from "leaflet";
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerIconShadow from 'leaflet/dist/images/marker-shadow.png';
-
-const defaultIcon = icon({
-    iconUrl: markerIcon,
-    shadowUrl: markerIconShadow
-});
-
-Marker.prototype.options.icon = defaultIcon;
+import defaultMarkerIcon from "../constants/defaultMarkerIcon"
 
 const SearchAddress = () => {
     const map = useMap();
@@ -26,12 +17,16 @@ const SearchAddress = () => {
         notFoundMessage: 'Sorry, that address could not be found.',
         searchLabel: 'Enter address.',
         marker: {
-            icon: defaultIcon,
+            icon: defaultMarkerIcon,
+            alt: 'Marker'
         },
     });
 
     useEffect(() => {
         map.addControl(searchControl);
+        map.locate().on("locationfound", e => {
+            map.flyTo(e.latlng, map.getZoom());
+        });
     });
 
     return null;

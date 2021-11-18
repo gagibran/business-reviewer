@@ -6,21 +6,11 @@ import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import SearchAddress from "./SearchAddress";
 
 const CustomMap = function () {
-    const getCoords = function () {
-        const coords: Array<number> = []
-        navigator.geolocation.getCurrentPosition(position => {
-            coords.push(position.coords.latitude);
-            coords.push(position.coords.longitude);
-        }, () => alert("Error: Could not get current coordinates."));
-        return coords;
-    };
-
     return (
         <main className="map" id="map">
-            {getCoords()}
             <MapContainer
                 className="map__map-container"
-                center={[51.505, -0.09]}
+                center={[51.5072, 0.1276]}
                 zoom={13}
                 scrollWheelZoom={true}
                 zoomControl={false}

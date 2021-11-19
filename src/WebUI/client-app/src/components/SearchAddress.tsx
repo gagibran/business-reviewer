@@ -18,15 +18,16 @@ const SearchAddress = () => {
         searchLabel: 'Enter address.',
         marker: {
             icon: defaultMarkerIcon,
-            alt: 'Marker'
+            alt: 'Marker',
         },
     });
 
     useEffect(() => {
         map.addControl(searchControl);
-        map.locate().on("locationfound", e => {
-            map.flyTo(e.latlng, map.getZoom());
-        });
+        map.locate({ setView: true, maxZoom: 16 })
+            .on("locationerror", () => {
+                alert('Could not find your current location.')
+            });
     });
 
     return null;

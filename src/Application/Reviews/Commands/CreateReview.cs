@@ -30,6 +30,8 @@ namespace BusinessReviewer.Application.Reviews.Commands
                 BusinessName = review.BusinessName,
                 BusinessType = review.BusinessType,
                 BusinessAddress = review.BusinessAddress,
+                BusinessLatitude = review.BusinessLatitude,
+                BusinessLongitude = review.BusinessLongitude,
                 ReviewerUsername = review.ReviewerUsername,
                 ReviewerName = review.ReviewerName,
                 ReviewTitle = review.ReviewTitle,

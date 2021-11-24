@@ -30,6 +30,7 @@ const SearchAddressField = () => {
                 alert('Could not find your current location.')
             });
         map.on('geosearch/showlocation', (e) => {
+            console.log(e);
             // @ts-ignore
             e.marker._events.click.push({
                 ctx: undefined, fn: () => {
@@ -37,6 +38,12 @@ const SearchAddressField = () => {
                     reviewForm?.classList.contains('hidden') ?
                         reviewForm?.classList.remove('hidden') :
                         reviewForm?.classList.add('hidden');
+                    // @ts-ignore
+                    (document.getElementById('businessAddress') as HTMLInputElement).value = e.location.raw.name;
+                    // @ts-ignore
+                    (document.getElementById('businessLatitude') as HTMLInputElement).value = e.location.x;
+                    // @ts-ignore
+                    (document.getElementById('businessLongitude') as HTMLInputElement).value = e.location.y;
                 }
             });
         });
@@ -44,7 +51,7 @@ const SearchAddressField = () => {
     });
 
     return (
-        <ReviewForm />
+        <ReviewForm reviewerName="Test" reviewerUsername="test" />
     );
 };
 

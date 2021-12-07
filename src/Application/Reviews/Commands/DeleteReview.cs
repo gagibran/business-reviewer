@@ -1,37 +1,29 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using BusinessReviewer.Application.Common.Exceptions;
-using BusinessReviewer.Application.Common.Interfaces;
-using MediatR;
+namespace BusinessReviewer.Application.Reviews.Commands;
 
-namespace BusinessReviewer.Application.Reviews.Commands
+public class DeleteReviewCommand : IRequest
 {
-    public class DeleteReviewCommand : IRequest
+    public Guid Id { get; set; }
+}
+
+public class DeleteReviewCommandHandler : IRequestHandler<DeleteReviewCommand>
+{
+    private readonly IApplicationDBContext _applicationDBContext;
+
+    public DeleteReviewCommandHandler(IApplicationDBContext applicationDBContext)
     {
-        public Guid Id { get; set; }
+        _applicationDBContext = applicationDBContext;
     }
 
-    public class DeleteReviewCommandHandler : IRequestHandler<DeleteReviewCommand>
+    public async Task<Unit> Handle(DeleteReviewCommand request, CancellationToken cancellationToken)
     {
-        private readonly IApplicationDBContext _applicationDBContext;
+        var reviewDeleted = await _applicationDBContext.Reviews.FindAsync(request.Id);
 
-        public DeleteReviewCommandHandler(IApplicationDBContext applicationDBContext)
-        {
-            _applicationDBContext = applicationDBContext;
-        }
+        if (reviewDeleted is null) throw new NotFoundException();
 
-        public async Task<Unit> Handle(DeleteReviewCommand request, CancellationToken cancellationToken)
-        {
-            var reviewDeleted = await _applicationDBContext.Reviews.FindAsync(request.Id);
+        _applicationDBContext.Reviews.Remove(reviewDeleted);
 
-            if (reviewDeleted is null) throw new NotFoundException();
+        await _applicationDBContext.SaveChangesAsync();
 
-            _applicationDBContext.Reviews.Remove(reviewDeleted);
-
-            await _applicationDBContext.SaveChangesAsync();
-
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }

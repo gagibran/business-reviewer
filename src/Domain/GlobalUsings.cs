@@ -1,0 +1,1 @@
+﻿global using BusinessReviewer.Domain.Common;

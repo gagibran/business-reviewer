@@ -1,11 +1,4 @@
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using BusinessReviewer.Application.Common.Interfaces;
-using BusinessReviewer.Domain.Entities;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 
 // Both classes are on the same file to improve discoverability.
 namespace BusinessReviewer.Application.Reviews.Queries

@@ -5,7 +5,6 @@ import { useMap } from "react-leaflet"
 import { EsriProvider, GeoSearchControl } from "leaflet-geosearch"
 import defaultMarkerIcon from "../constants/defaultMarkerIcon"
 import "leaflet-geosearch/assets/css/leaflet.css"
-import ReviewForm from "./ReviewForm"
 
 const SearchAddressField = () => {
     const map = useMap();
@@ -30,14 +29,12 @@ const SearchAddressField = () => {
                 alert('Could not find your current location.')
             });
         map.on('geosearch/showlocation', (e) => {
-            console.log(e);
             // @ts-ignore
             e.marker._events.click.push({
-                ctx: undefined, fn: () => {
-                    const reviewForm = document.getElementById('reviewForm');
-                    reviewForm?.classList.contains('hidden') ?
-                        reviewForm?.classList.remove('hidden') :
-                        reviewForm?.classList.add('hidden');
+                ctx: undefined,
+                fn: () => {
+                    const reviewFormOverlay = document.getElementById('reviewFormOverlay');
+                    reviewFormOverlay?.classList.toggle('hidden');
                     // @ts-ignore
                     (document.getElementById('businessAddress') as HTMLInputElement).value = e.location.raw.name;
                     // @ts-ignore
@@ -50,9 +47,7 @@ const SearchAddressField = () => {
         return () => map.removeControl(searchControl);
     });
 
-    return (
-        <ReviewForm reviewerName="Test" reviewerUsername="test" />
-    );
+    return null;
 };
 
 export default SearchAddressField;

@@ -5,6 +5,7 @@ import { useMap } from "react-leaflet"
 import { EsriProvider, GeoSearchControl } from "leaflet-geosearch"
 import defaultMarkerIcon from "../constants/defaultMarkerIcon"
 import "leaflet-geosearch/assets/css/leaflet.css"
+import { SearchResult } from "leaflet-geosearch/dist/providers/provider"
 
 const SearchAddressField = () => {
     const map = useMap();
@@ -22,6 +23,10 @@ const SearchAddressField = () => {
                 icon: defaultMarkerIcon,
                 alt: 'Marker'
             },
+            popupFormat: (args: { query: Selection, result: SearchResult }) => {
+                // REMOVE THIS FROM HERE AND MAKE IT A POPUP ON PAGE LOAD.
+                return args.result.label + '. Click on the marker to add a review.';
+            }
         });
         map.addControl(searchControl);
         map.locate({ setView: true, maxZoom: 16 })
@@ -34,7 +39,8 @@ const SearchAddressField = () => {
                 ctx: undefined,
                 fn: () => {
                     const reviewFormOverlay = document.getElementById('reviewFormOverlay');
-                    reviewFormOverlay?.classList.toggle('hidden');
+                    reviewFormOverlay?.classList.remove('hidden');
+                    reviewFormOverlay?.classList.remove('fadeout');
                     // @ts-ignore
                     (document.getElementById('businessAddress') as HTMLInputElement).value = e.location.raw.name;
                     // @ts-ignore

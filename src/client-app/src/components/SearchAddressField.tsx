@@ -5,7 +5,6 @@ import { useMap } from "react-leaflet"
 import { EsriProvider, GeoSearchControl } from "leaflet-geosearch"
 import defaultMarkerIcon from "../constants/defaultMarkerIcon"
 import "leaflet-geosearch/assets/css/leaflet.css"
-import { SearchResult } from "leaflet-geosearch/dist/providers/provider"
 
 const SearchAddressField = () => {
     const map = useMap();
@@ -21,11 +20,9 @@ const SearchAddressField = () => {
             searchLabel: 'Enter an address.',
             marker: {
                 icon: defaultMarkerIcon,
-                alt: 'Marker'
-            },
-            popupFormat: (args: { query: Selection, result: SearchResult }) => {
-                // REMOVE THIS FROM HERE AND MAKE IT A POPUP ON PAGE LOAD.
-                return args.result.label + '. Click on the marker to add a review.';
+                alt: 'Marker',
+                keyboard: true,
+                title: 'Click on this marker to add a review.'
             }
         });
         map.addControl(searchControl);

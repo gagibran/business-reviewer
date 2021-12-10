@@ -1,6 +1,6 @@
 import { FormReview } from "../interfaces/formReview";
 import "../styles/ReviewForm.scss";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineStar } from "react-icons/ai";
 
 const TIMEOUT = 250;
 
@@ -60,8 +60,14 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
                     Grade
                     <span className="review-form__required">*</span>
                 </label>
-                {/* Change this into pictures. */}
-                <input type="number" name="ReviewGrade" id="ReviewGrade" max="5" min="0" required />
+                <input type="number" name="ReviewGrade" id="ReviewGrade" max="5" min="0" required hidden />
+                <div className="review-form__star-container">
+                    <AiOutlineStar />
+                    <AiOutlineStar />
+                    <AiOutlineStar />
+                    <AiOutlineStar />
+                    <AiOutlineStar />
+                </div>
                 <label htmlFor="ReviewDescription">Description</label>
                 <textarea name="ReviewDescription" id="ReviewDescription" />
                 <button type="submit">Submit</button>

@@ -11,6 +11,8 @@
     color: get-color('light-primary');
     transition: width 0.5s;
     z-index: 2;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     #{&}__arrow {
         padding: 5px;
@@ -18,8 +20,6 @@
         color: get-color('dark-primary');
         background-color: get-color('light-blue');
         margin-top: 10px;
-        grid-column: 2 / 3;
-        justify-self: end;
         font-size: 1.8rem;
         transform: translateX(50%);
         transition: transform 0.5s;
@@ -64,8 +64,15 @@
         margin-right: 20px;
     }
 
+    
+    @media (max-width: 340px) {
+        #{&}__arrow {
+            visibility: hidden;
+        }
+    }
+
     &.deactivated {
-        width: 100px;
+        width: 70px;
         transition: width 0.5s;
 
         .side-navbar__brand span {
@@ -88,7 +95,7 @@
         }
 
         .side-navbar__profile-picture {
-            @include rounded-image(60px);
+            @include rounded-image(40px);
         }
 
         .side-navbar__user-name {
@@ -106,4 +113,10 @@
             }
         }
     }
+}
+
+// More info: https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll
+.side-navbar::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 }

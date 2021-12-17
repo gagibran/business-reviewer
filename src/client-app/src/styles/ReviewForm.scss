@@ -20,72 +20,67 @@
         opacity: 0;
         transition: opacity 0.3s ease-in;
     }
+}
 
-    & .review-form {
-        @include flex-container($direction: column);
-        background-color: white;
-        position: relative;
-        top: 15%;
-        left: 38%;
-        padding: 30px;
-        border-radius: 7px;
-        box-shadow: 0 3px 14px #00000066;
-        width: 25%;
+.review-form {
+    @include flex-container($direction: column);
+    background-color: white;
+    position: relative;
+    top: 15%;
+    left: 38%;
+    padding: 30px;
+    border-radius: 7px;
+    box-shadow: 0 3px 14px #00000066;
+    width: 25%;
 
-        label {
-            font-weight: 900;
-            margin-bottom: 5px;
-        }
+    label {
+        font-weight: 900;
+        margin-bottom: 5px;
+    }
 
-        input {
-            margin-bottom: 25px;
-            text-align: center;
-            border: none;
-            border-bottom: 1px solid black;
-        }
+    input {
+        margin-bottom: 25px;
+        text-align: center;
+        border: none;
+        border-bottom: 1px solid black;
+    }
 
-        input, select, textarea, .review-form__star-container {
-            margin-bottom: 20px;
-        }
+    textarea {
+        resize: none;
+    }
 
-        textarea {
-            resize: none;
-        }
+    input, select, textarea, #{&}__star-container {
+        margin-bottom: 20px;
+    }
 
-        .review-form__required {
-            color: red;
-        }
+    #{&}__required {
+        color: red;
+    }
 
-        .review-form__close-icon {
-            position: absolute;
-            top: 13px;
-            right: 15px;
-            cursor: pointer;
-        }
+    #{&}__close-icon {
+        position: absolute;
+        top: 13px;
+        right: 15px;
+        cursor: pointer;
+    }
 
-        .review-form__star-container {
-            @include flex-container(row);
-            cursor: pointer;
-        }
+    #{&}__star-container {
+        @include flex-container(row-reverse);
     }
 
     @media (max-width: 548px) {
-        & .review-form {
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 100vw;
-            padding: 0;
-        }
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        padding: 0;
     }
 
     @media (max-height: 645px) {
-        & .review-form {
-            padding-left: 0;
-            padding-right: 0;
-            top: 0;
-            left: 0;
-            width: 100vw;
-        }
+        padding-left: 0;
+        padding-right: 0;
+        top: 0;
+        left: 0;
+        width: 100vw;
     }
 }

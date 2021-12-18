@@ -1,10 +1,9 @@
 import { useRef } from "react";
 import { FormReview } from "../interfaces/formReview";
-import "../styles/ReviewForm.scss";
 import { AiOutlineClose } from "react-icons/ai";
+import { BUSINESS_TYPES, TIMEOUT } from "../constants/reviewFormConstants";
 import ReviewStar from "./ReviewStar";
-
-const TIMEOUT = 250;
+import "../styles/ReviewForm.scss";
 
 const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
     const overlayRef = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -18,8 +17,16 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
     };
 
     const setInputGrade = function (grade: string) {
-        gradeInputRef.current.value = grade
-    }
+        gradeInputRef.current.value = grade;
+    };
+
+    const createReviewStars = function (maxGrade: number) {
+        let reviewStars = [];
+        for (let index = maxGrade; index > 0; index--) {
+            reviewStars.push(<ReviewStar setGrade={setInputGrade} grade={index.toString()} />);
+        }
+        return reviewStars;
+    };
 
     return (
         <div
@@ -36,7 +43,6 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
                 <AiOutlineClose
                     className="review-form__close-icon"
                     onClick={() => {
-                        // @ts-ignore
                         animateOverlayFadeout(overlayRef.current, TIMEOUT);
                     }}
                 />
@@ -54,9 +60,7 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
                     <span className="review-form__required">*</span>
                 </label>
                 <select name="businessType" id="businessType" required>
-                    <option value="Restaurant">Restaurant</option>
-                    <option value="Grocery Store">Grocery Store</option>
-                    <option value="Pub">Pub</option>
+                    {BUSINESS_TYPES.map((name) => <option value={name}>{name}</option>)}
                 </select>
                 <label htmlFor="ReviewTitle">
                     Title
@@ -69,11 +73,7 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
                 </label>
                 <input type="number" name="ReviewGrade" id="ReviewGrade" max="5" min="0" required hidden />
                 <div className="review-form__star-container">
-                    <ReviewStar setGrade={setInputGrade} grade="5" />
-                    <ReviewStar setGrade={setInputGrade} grade="4" />
-                    <ReviewStar setGrade={setInputGrade} grade="3" />
-                    <ReviewStar setGrade={setInputGrade} grade="2" />
-                    <ReviewStar setGrade={setInputGrade} grade="1" />
+                    {createReviewStars(5)}
                 </div>
                 <input ref={gradeInputRef} type="number" hidden />
                 <label htmlFor="ReviewDescription">Description</label>

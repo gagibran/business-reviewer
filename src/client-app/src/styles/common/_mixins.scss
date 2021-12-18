@@ -5,16 +5,6 @@
     align-items: $align;
 }
 
-@mixin vertically-centered-block($is-inline: false) {
-    margin-left: auto;
-    margin-right: auto;
-    @if $is-inline {
-        display: inline-block;
-    } @else {
-        display: block;
-    }
-}
-
 @mixin side-navbar($width) {
     height: 100vh;
     position: fixed;
@@ -76,4 +66,8 @@
     color: get-color('light-primary');
     background-color: get-color('light-secondary');
     border-left: 6px solid get-color('light-blue');
+}
+
+@mixin submit-button($size) {
+    
 }

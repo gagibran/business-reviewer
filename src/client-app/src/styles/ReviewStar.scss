@@ -1,25 +1,17 @@
 @import './common/functions';
 
-.review-star {
-    cursor: pointer;
-
-    path {
+.review-form__star-container {
+    label path {
         fill: get-color('dark-secondary')
     }
-
-    :hover path {
-        fill: get-color('gold');
+    
+    input {
+        display: none;
     }
-
-    &:hover ~ & path {
-        fill: get-color('gold');
-    }
-
-    &:focus path {
-        fill: get-color('gold');
-    }
-
-    &:focus ~ & path {
+    
+    label:hover path,
+    label:hover ~ label path,
+    input:checked ~ label path {
         fill: get-color('gold');
     }
 }

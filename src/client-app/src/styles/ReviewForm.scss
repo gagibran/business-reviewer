@@ -55,6 +55,10 @@
         background-color: unset;
     }
 
+    button {
+        @include submit-button($size: 10px);
+    }
+
     #{&}__required {
         color: get-color('danger');
     }
@@ -67,7 +71,7 @@
     }
 
     #{&}__star-container {
-        @include flex-container(row-reverse);
+        @include flex-container($direction: row-reverse);
     }
 
     @media (max-width: 548px) {

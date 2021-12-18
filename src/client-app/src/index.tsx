@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.scss';
 import './styles/reset.scss';
 import reportWebVitals from './reportWebVitals';
 import Nav from './components/Nav';

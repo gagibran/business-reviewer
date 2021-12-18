@@ -7,12 +7,13 @@ import ReviewStar from "./ReviewStar";
 const TIMEOUT = 250;
 
 const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
+    const overlayRef = useRef() as React.MutableRefObject<HTMLInputElement>;
     const gradeInputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
     const animateOverlayFadeout = function (overlay: any, timeout: number) {
-        overlay.classList.add('fadeout');
+        overlay.classList.add('review-form-overlay--fadeout');
         setTimeout(() => {
-            overlay?.classList.add('hidden');
+            overlay?.classList.add('review-form-overlay--hidden');
         }, timeout);
     };
 
@@ -23,9 +24,12 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
     return (
         <div
             id="reviewFormOverlay"
-            className="fadeout hidden"
+            className="review-form-overlay review-form-overlay--fadeout review-form-overlay--hidden"
+            ref={overlayRef}
             onClick={(e) => {
-                animateOverlayFadeout(e.target, TIMEOUT);
+                if (e.target === overlayRef.current) {
+                    animateOverlayFadeout(overlayRef.current, TIMEOUT);
+                }
             }}
         >
             <form id="reviewForm" className="review-form">
@@ -33,8 +37,7 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
                     className="review-form__close-icon"
                     onClick={() => {
                         // @ts-ignore
-                        const overlay = document.getElementById('reviewFormOverlay');
-                        animateOverlayFadeout(overlay, TIMEOUT);
+                        animateOverlayFadeout(overlayRef.current, TIMEOUT);
                     }}
                 />
                 <input type="text" name="reviewerName" id="reviewerName" defaultValue={reviewerName} hidden />

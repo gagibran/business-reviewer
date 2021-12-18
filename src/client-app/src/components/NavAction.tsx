@@ -1,9 +1,9 @@
 import { Action } from "../interfaces/action";
-import "../styles/NavAction.scss";
+import "../styles/Nav.scss";
 
-const NavAction = function ({ icon, actionRoute, actionName }: Action) {
+const NavAction = function ({ icon, actionRoute, actionName, deactivatedNavClassName }: Action) {
     return (
-        <a href={actionRoute} className="side-navbar__action">
+        <a href={actionRoute} className={'side-navbar__action' + deactivatedNavClassName}>
             {icon}
             <span>{actionName}</span>
         </a>

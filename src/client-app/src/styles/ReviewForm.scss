@@ -1,7 +1,8 @@
-@import 'common';
+@import './common/mixins';
+@import './common/functions';
 
-#reviewFormOverlay {
-    background-color: #00000079;
+.review-form-overlay {
+    background-color: get-color('overlay');
     position: absolute;
     top: 0;
     z-index: 314159;
@@ -11,12 +12,12 @@
     visibility: visible;
     transition: opacity 0.3s ease-in;
 
-    &.hidden {
+    &--hidden {
         visibility: hidden;
         height: 0;
     }
 
-    &.fadeout {
+    &--fadeout {
         opacity: 0;
         transition: opacity 0.3s ease-in;
     }
@@ -24,13 +25,13 @@
 
 .review-form {
     @include flex-container($direction: column);
-    background-color: white;
+    background-color: get-color('light-primary');
     position: relative;
     top: 15%;
     left: 38%;
     padding: 30px;
     border-radius: 7px;
-    box-shadow: 0 3px 14px #00000066;
+    box-shadow: 0 3px 14px get-color('shadow');
     width: 25%;
 
     label {
@@ -42,7 +43,7 @@
         margin-bottom: 25px;
         text-align: center;
         border: none;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid get-color('dark-primary');
     }
 
     textarea {
@@ -51,10 +52,11 @@
 
     input, select, textarea, #{&}__star-container {
         margin-bottom: 20px;
+        background-color: unset;
     }
 
     #{&}__required {
-        color: red;
+        color: get-color('danger');
     }
 
     #{&}__close-icon {

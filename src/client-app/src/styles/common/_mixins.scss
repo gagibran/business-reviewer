@@ -1,0 +1,79 @@
+@mixin flex-container($direction: row, $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin vertically-centered-block($is-inline: false) {
+    margin-left: auto;
+    margin-right: auto;
+    @if $is-inline {
+        display: inline-block;
+    } @else {
+        display: block;
+    }
+}
+
+@mixin side-navbar($width) {
+    height: 100vh;
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: min-content;
+    width: $width;
+    background-color: get-color('dark-primary');
+    color: get-color('light-primary');
+    transition: width 0.5s;
+    z-index: 2;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+@mixin webkit-scrollbar-hidden() {
+    width: 0;
+    background: transparent;
+}
+
+@mixin side-navbar-arrow() {
+    padding: 5px;
+    border-radius: 50%;
+    color: get-color('dark-primary');
+    background-color: get-color('light-blue');
+    margin-top: 10px;
+    font-size: 1.8rem;
+}
+
+@mixin side-navbar-brand {
+    text-align: center;
+    grid-column: span 2;
+    margin: 20px 0;
+    font-size: 2rem;
+}
+
+@mixin side-navbar-profile-picture($size) {
+    width: $size;
+    height: $size;
+    object-fit: cover;
+    border: 2px solid get-color('light-primary');
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+    grid-column: span 2;
+    margin-bottom: 20px;
+}
+
+@mixin side-navbar-action($font-size, $padding-x) {
+    color: get-color('light-primary-faded');
+    font-size: $font-size;
+    grid-column: span 2;
+    margin-bottom: 10px;
+    padding: 10px $padding-x;
+    z-index: 3;
+}
+
+@mixin side-navbar-action-hover-active() {
+    color: get-color('light-primary');
+    background-color: get-color('light-secondary');
+    border-left: 6px solid get-color('light-blue');
+}

@@ -8,18 +8,49 @@ import { useState } from "react";
 
 const Nav = function ({ userName, profilePictureSrc }: ProfileInfo) {
     const [navbar, setNavbar] = useState(false);
+    const deactivatedNavClassName = !navbar ? '--deactivated' : '';
 
     return (
-        <nav className={`side-navbar${!navbar ? ' deactivated' : ''}`}>
-            <AiOutlineArrowLeft className="side-navbar__arrow" onClick={() => setNavbar(!navbar)} />
-            <a className="side-navbar__brand" href="/"><span>Business Reviewer</span></a>
+        <nav className={'side-navbar' + deactivatedNavClassName}>
+            <AiOutlineArrowLeft
+                className={'side-navbar__arrow' + deactivatedNavClassName}
+                onClick={() => setNavbar(!navbar)}
+            />
+            <a className={'side-navbar__brand' + deactivatedNavClassName}
+                href="/"
+            >
+                {navbar ? 'Business Review' : 'BR'}
+            </a>
             <hr className="side-navbar__separator" />
-            <img src={profilePictureSrc} alt={userName} className="side-navbar__profile-picture" />
-            <p className="side-navbar__user-name">{userName}</p>
+            <img
+                src={profilePictureSrc}
+                alt={userName}
+                className={'side-navbar__profile-picture' + deactivatedNavClassName}
+            />
+            <p
+                className={'side-navbar__user-name' + deactivatedNavClassName}
+            >
+                {userName}
+            </p>
             <hr className="side-navbar__separator" />
-            <NavAction icon={<AiOutlineHome className="side-navbar__icon" />} actionRoute="/" actionName="Home" />
-            <NavAction icon={<MdOutlineRateReview className="side-navbar__icon" />} actionRoute="/" actionName="My Reviews" />
-            <NavAction icon={<BiCog className="side-navbar__icon" />} actionRoute="/" actionName="Settings" />
+            <NavAction
+                deactivatedNavClassName={deactivatedNavClassName}
+                icon={<AiOutlineHome />}
+                actionRoute="/"
+                actionName="Home"
+            />
+            <NavAction
+                deactivatedNavClassName={deactivatedNavClassName}
+                icon={<MdOutlineRateReview />}
+                actionRoute="/"
+                actionName="My Reviews"
+            />
+            <NavAction
+                deactivatedNavClassName={deactivatedNavClassName}
+                icon={<BiCog />}
+                actionRoute="/"
+                actionName="Settings"
+            />
         </nav>
     );
 };

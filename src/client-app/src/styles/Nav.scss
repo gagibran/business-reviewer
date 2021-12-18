@@ -1,45 +1,26 @@
-@import 'common';
+@import './common/functions';
+@import './common/mixins';
 
 .side-navbar {
-    height: 100vh;
-    position: fixed;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: min-content;
-    width: 300px;
-    background-color: get-color('dark-primary');
-    color: get-color('light-primary');
-    transition: width 0.5s;
-    z-index: 2;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    @include side-navbar($width: 300px);
+
+    &::-webkit-scrollbar {
+        @include webkit-scrollbar-hidden();
+    }
 
     #{&}__arrow {
-        padding: 5px;
-        border-radius: 50%;
-        color: get-color('dark-primary');
-        background-color: get-color('light-blue');
-        margin-top: 10px;
-        font-size: 1.8rem;
-        transform: translateX(50%);
+        @include side-navbar-arrow();
+        transform: translateX(45%);
         transition: transform 0.5s;
     }
 
-    #{&}__brand {
-        text-align: center;
-        grid-column: span 2;
-        margin: 20px 0;
+    &__brand {
+        @include side-navbar-brand();
         padding: 0 20px;
-        font-size: 2rem;
     }
 
     #{&}__profile-picture {
-        @include rounded-image(80px);
-        border: 2px solid get-color('light-primary');
-        align-self: center;
-        justify-self: center;
-        grid-column: span 2;
-        margin-bottom: 20px;
+        @include side-navbar-profile-picture($size: 80px);
     }
 
     #{&}__user-name {
@@ -49,7 +30,7 @@
         font-size: 1.6rem;
     }
 
-    #{&}__separator {
+    &__separator {
         border-top: none;
         border-left: none;
         border-right: none;
@@ -59,64 +40,69 @@
         border-color: get-color('light-secondary');
     }
 
-    #{&}__icon {
-        font-size: 1.3rem;
-        margin-right: 20px;
+    #{&}__action {
+        @include flex-container($direction: row, $justify: flex-start, $align: center);
+        @include side-navbar-action($font-size: 1.3rem, $padding-x: 40px);
+
+        svg {
+            margin-right: 20px;
+        }
+
+        &:hover, &:active {
+            @include side-navbar-action-hover-active();
+        }
     }
 
-    
     @media (max-width: 340px) {
         #{&}__arrow {
             visibility: hidden;
         }
     }
 
-    &.deactivated {
-        width: 70px;
-        transition: width 0.5s;
-
-        .side-navbar__brand span {
-            display: none;
-        }
-
-        .side-navbar__brand::after {
-            content: "BR";
-        }
-
-        .side-navbar__arrow {
-            transform: rotate(180deg) translateX(-50%);
-            transition: transform 0.5s;
-        }
-
-        .side-navbar__icon {
-            grid-column: span 2;
-            font-size: 1.9rem;
-            margin-right: 0;
-        }
-
-        .side-navbar__profile-picture {
-            @include rounded-image(40px);
-        }
-
-        .side-navbar__user-name {
-            display: none;
-        }
-
-        .side-navbar__action {
-            display: block;
-            padding-left: 0;
-            padding-right: 0;
-            text-align: center;
-
-            span {
-                display: none;
-            }
-        }
+    // More info: https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll
+    &::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
     }
 }
 
-// More info: https://stackoverflow.com/questions/16670931/hide-scroll-bar-but-while-still-being-able-to-scroll
-.side-navbar::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
+.side-navbar--deactivated {
+    @include side-navbar($width: 70px);
+
+    &::-webkit-scrollbar {
+        @include webkit-scrollbar-hidden();
+    }
+
+    .side-navbar__arrow--deactivated {
+        @include side-navbar-arrow();
+        transition: transform 0.5s;
+        transform: rotate(180deg) translateX(-45%);
+    }
+
+    .side-navbar__brand--deactivated {
+        @include side-navbar-brand();
+    }
+
+    .side-navbar__profile-picture--deactivated {
+        @include side-navbar-profile-picture($size: 40px);
+    }
+
+    .side-navbar__user-name--deactivated {
+        display: none;
+    }
+
+    .side-navbar__action--deactivated {
+        @include side-navbar-action($font-size: 1.9rem, $padding-x: 0);
+        margin-right: 0;
+        display: block;
+        text-align: center;
+
+        span {
+            display: none;
+        }
+
+        &:hover, &:active {
+            @include side-navbar-action-hover-active();
+        }
+    }
 }

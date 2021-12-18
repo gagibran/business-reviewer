@@ -1,25 +1,25 @@
-@import 'common';
+@import './common/functions';
 
 .review-star {
     cursor: pointer;
-}
 
-.review-star path {
-    fill: grey;
-}
+    path {
+        fill: get-color('dark-secondary')
+    }
 
-.review-star:hover path {
-    fill: yellow;
-}
+    :hover path {
+        fill: get-color('gold');
+    }
 
-.review-star:hover ~ .review-star path {
-    fill: yellow;
-}
+    &:hover ~ & path {
+        fill: get-color('gold');
+    }
 
-.review-star:focus path {
-    fill: yellow;
-}
+    &:focus path {
+        fill: get-color('gold');
+    }
 
-.review-star:focus ~ .review-star path {
-    fill: yellow;
+    &:focus ~ & path {
+        fill: get-color('gold');
+    }
 }

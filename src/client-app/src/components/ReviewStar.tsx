@@ -8,7 +8,8 @@ const ReviewStar = function ({ setGrade, grade }: StarReviewButton) {
             onClick={(e) => {
                 e.preventDefault();
                 setGrade(grade);
-            }}>
+            }}
+        >
             <svg
                 width="36"
                 height="33"

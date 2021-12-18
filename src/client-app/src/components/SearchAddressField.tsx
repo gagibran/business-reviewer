@@ -36,8 +36,8 @@ const SearchAddressField = () => {
                 ctx: undefined,
                 fn: () => {
                     const reviewFormOverlay = document.getElementById('reviewFormOverlay');
-                    reviewFormOverlay?.classList.remove('hidden');
-                    reviewFormOverlay?.classList.remove('fadeout');
+                    reviewFormOverlay?.classList.remove('review-form-overlay--hidden');
+                    reviewFormOverlay?.classList.remove('review-form-overlay--fadeout');
                     // @ts-ignore
                     (document.getElementById('businessAddress') as HTMLInputElement).value = e.location.raw.name;
                     // @ts-ignore

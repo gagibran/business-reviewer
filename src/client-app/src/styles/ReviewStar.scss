@@ -4,11 +4,15 @@
     label path {
         fill: get-color('dark-secondary')
     }
-    
+
     input {
         display: none;
     }
-    
+
+    label {
+        cursor: pointer;
+    }
+
     label:hover path,
     label:hover ~ label path,
     input:checked ~ label path {

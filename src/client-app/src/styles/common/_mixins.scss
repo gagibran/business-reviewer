@@ -1,3 +1,5 @@
+@import 'constants';
+
 @mixin flex-container($direction: row, $justify: center, $align: center) {
     display: flex;
     flex-direction: $direction;
@@ -68,6 +70,21 @@
     border-left: 6px solid get-color('light-blue');
 }
 
-@mixin submit-button($size) {
-    
+@mixin review-form-small-screen {
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+
+@mixin review-form-elements($background-color: unset, $has-border: true) {
+    @if $has-border {
+        border: 1px solid get-color('form-input-border');
+    } @else {
+        border: none;
+    }
+    border-radius: $review-form-elements-border-radius;
+    margin-bottom: $review-form-elements-margin-bottom;
+    width: 80%;
+    padding: 7px;
+    background-color: $background-color;
 }

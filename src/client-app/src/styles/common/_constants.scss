@@ -1,0 +1,22 @@
+$review-form-elements-margin-bottom: 30px;
+
+$review-form-elements-border-radius: 7px;
+
+$review-form-transition-time: 0.3s;
+
+$colors: (
+    'dark-primary': #10141b,
+    'dark-secondary': #37475e,
+    'light-primary': #f8f4ec,
+    'light-secondary': #83828142,
+    'light-primary-faded': #f8f4ec86,
+    'light-blue': #93b9fa,
+    'gold': #fad963,
+    'danger': #e70a0a,
+    'shadow': #00000066,
+    'overlay': #00000079,
+    'form-input-border': #28272671,
+    'primary-blue': #3aaaf5
+    );
+
+$review-form-shadow: 0 3px 14px map-get($colors, 'shadow');

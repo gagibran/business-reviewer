@@ -1,4 +1,4 @@
-@import '_colors';
+@import 'constants';
 
 @function get-color($color) {
     @return map-get($colors, $color);

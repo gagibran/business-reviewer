@@ -1,5 +1,6 @@
 @import './common/mixins';
 @import './common/functions';
+@import './common/constants';
 
 .review-form-overlay {
     background-color: get-color('overlay');
@@ -10,7 +11,7 @@
     width: 100vw;
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.3s ease-in;
+    transition: opacity $review-form-transition-time ease-in;
 
     &--hidden {
         visibility: hidden;
@@ -19,7 +20,7 @@
 
     &--fadeout {
         opacity: 0;
-        transition: opacity 0.3s ease-in;
+        transition: opacity $review-form-transition-time ease-in;
     }
 }
 
@@ -27,11 +28,11 @@
     @include flex-container($direction: column);
     background-color: get-color('light-primary');
     position: relative;
-    top: 15%;
-    left: 38%;
+    top: 5%;
+    left: 37.6%;
     padding: 30px;
-    border-radius: 7px;
-    box-shadow: 0 3px 14px get-color('shadow');
+    border-radius: $review-form-elements-border-radius;
+    box-shadow: $review-form-shadow;
     width: 25%;
 
     label {
@@ -39,24 +40,33 @@
         margin-bottom: 5px;
     }
 
-    input {
-        margin-bottom: 25px;
-        text-align: center;
-        border: none;
-        border-bottom: 1px solid get-color('dark-primary');
-    }
-
     textarea {
         resize: none;
-    }
-
-    input, select, textarea, #{&}__star-container {
-        margin-bottom: 20px;
-        background-color: unset;
+        height: 55px;
     }
 
     button {
-        @include submit-button($size: 10px);
+        @include review-form-elements($background-color: get-color('light-secondary'), $has-border: false);
+        font-size: 1.2rem;
+        transition: background-color $review-form-transition-time ease-in,
+                    color $review-form-transition-time ease-in,
+                    box-shadow $review-form-transition-time ease-in;
+        cursor: pointer;
+        
+        &:hover {
+            box-shadow: $review-form-shadow;
+            background-color: get-color('primary-blue');
+            color: get-color('light-primary');
+            border-color: get-color('primary-blue');
+        }
+    }
+
+    #{&}__star-container {
+        margin-bottom: $review-form-elements-margin-bottom;
+    }
+
+    input, select, textarea {
+        @include review-form-elements();
     }
 
     #{&}__required {
@@ -75,18 +85,14 @@
     }
 
     @media (max-width: 548px) {
-        top: 0;
-        left: 0;
+        @include review-form-small-screen();
         height: 100vh;
-        width: 100vw;
         padding: 0;
     }
 
     @media (max-height: 645px) {
+        @include review-form-small-screen();
         padding-left: 0;
         padding-right: 0;
-        top: 0;
-        left: 0;
-        width: 100vw;
     }
 }

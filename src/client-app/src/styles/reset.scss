@@ -20,6 +20,8 @@ a {
     color: inherit;
 }
 
-input, select {
+input, select, textarea, button {
     outline: none;
+    box-sizing:content-box;
+    font-family: 'Catamaran', sans-serif;
 }

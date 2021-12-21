@@ -23,7 +23,7 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
     const createReviewStars = function (maxGrade: number) {
         let reviewStars = [];
         for (let index = maxGrade; index > 0; index--) {
-            reviewStars.push(<ReviewStar setGrade={setInputGrade} grade={index.toString()} />);
+            reviewStars.push(<ReviewStar setGrade={setInputGrade} grade={index.toString()} key={index} />);
         }
         return reviewStars;
     };
@@ -60,7 +60,7 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
                     <span className="review-form__required">*</span>
                 </label>
                 <select name="businessType" id="businessType" required>
-                    {BUSINESS_TYPES.map((name) => <option value={name}>{name}</option>)}
+                    {BUSINESS_TYPES.map((name, index) => <option key={index} value={name}>{name}</option>)}
                 </select>
                 <label htmlFor="ReviewTitle">
                     Title

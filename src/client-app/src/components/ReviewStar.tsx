@@ -1,7 +1,7 @@
 import "../styles/ReviewStar.scss";
 import { StarReviewButton } from "../interfaces/starReviewButton";
 
-const ReviewStar = function ({ setGrade, grade }: StarReviewButton) {
+const ReviewStar = function ({ grade }: StarReviewButton) {
     return (
         <>
             <input

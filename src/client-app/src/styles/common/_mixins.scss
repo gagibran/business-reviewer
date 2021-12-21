@@ -76,9 +76,9 @@
     width: 100vw;
 }
 
-@mixin review-form-elements($background-color: unset, $has-border: true) {
+@mixin review-form-elements($background-color: unset, $has-border: true, $border-color: get-color('form-input-border')) {
     @if $has-border {
-        border: 1px solid get-color('form-input-border');
+        border: 1px solid $border-color;
     } @else {
         border: none;
     }

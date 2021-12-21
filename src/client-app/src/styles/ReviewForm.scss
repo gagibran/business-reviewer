@@ -28,7 +28,7 @@
     @include flex-container($direction: column);
     background-color: get-color('light-primary');
     position: relative;
-    top: 5%;
+    top: 4%;
     left: 37.6%;
     padding: 30px;
     border-radius: $review-form-elements-border-radius;
@@ -46,18 +46,19 @@
     }
 
     button {
-        @include review-form-elements($background-color: get-color('light-secondary'), $has-border: false);
+        @include review-form-elements($border-color: get-color('blue-primary'));
         font-size: 1.2rem;
         transition: background-color $review-form-transition-time ease-in,
                     color $review-form-transition-time ease-in,
                     box-shadow $review-form-transition-time ease-in;
+        color: get-color('blue-primary');
         cursor: pointer;
-        
+
         &:hover {
             box-shadow: $review-form-shadow;
-            background-color: get-color('primary-blue');
+            background-color: get-color('blue-primary');
             color: get-color('light-primary');
-            border-color: get-color('primary-blue');
+            border-color: get-color('blue-primary');
         }
     }
 

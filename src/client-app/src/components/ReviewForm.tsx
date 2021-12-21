@@ -7,7 +7,6 @@ import "../styles/ReviewForm.scss";
 
 const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
     const overlayRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-    const gradeInputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
     const animateOverlayFadeout = function (overlay: any, timeout: number) {
         overlay.classList.add('review-form-overlay--fadeout');
@@ -16,14 +15,10 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
         }, timeout);
     };
 
-    const setInputGrade = function (grade: string) {
-        gradeInputRef.current.value = grade;
-    };
-
     const createReviewStars = function (maxGrade: number) {
         let reviewStars = [];
         for (let index = maxGrade; index > 0; index--) {
-            reviewStars.push(<ReviewStar setGrade={setInputGrade} grade={index.toString()} key={index} />);
+            reviewStars.push(<ReviewStar grade={index.toString()} key={index} />);
         }
         return reviewStars;
     };
@@ -53,8 +48,8 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
                     <span className="review-form__required">*</span>
                 </label>
                 <input type="text" name="businessAddress" id="businessAddress" readOnly />
-                <input type="number" name="businessLatitude" id="businessLatitude" hidden />
-                <input type="number" name="businessLongitude" id="businessLongitude" hidden />
+                <input type="number" name="businessLatitude" id="businessLatitude" step="any" hidden />
+                <input type="number" name="businessLongitude" id="businessLongitude" step="any" hidden />
                 <label htmlFor="businessType">
                     Business Type
                     <span className="review-form__required">*</span>
@@ -71,11 +66,9 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
                     Grade
                     <span className="review-form__required">*</span>
                 </label>
-                <input type="number" name="ReviewGrade" id="ReviewGrade" max="5" min="0" required hidden />
                 <div className="review-form__star-container">
                     {createReviewStars(5)}
                 </div>
-                <input ref={gradeInputRef} type="number" hidden />
                 <label htmlFor="ReviewDescription">Description</label>
                 <textarea name="ReviewDescription" id="ReviewDescription" />
                 <button type="submit">Submit</button>

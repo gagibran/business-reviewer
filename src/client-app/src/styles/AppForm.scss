@@ -92,7 +92,7 @@
         padding: 0;
     }
 
-    @media (max-height: 645px) {
+    @media (max-height: 570px) {
         @include review-form-small-screen();
         padding-left: 0;
         padding-right: 0;

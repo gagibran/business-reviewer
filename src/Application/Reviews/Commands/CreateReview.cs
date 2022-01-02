@@ -20,12 +20,8 @@ public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand, R
         Review reviewCreated = new()
         {
             Id = Guid.NewGuid(),
-            BusinessType = review.BusinessType,
-            BusinessAddress = review.BusinessAddress,
-            BusinessLatitude = review.BusinessLatitude,
-            BusinessLongitude = review.BusinessLongitude,
-            ReviewerUsername = review.ReviewerUsername,
-            ReviewerName = review.ReviewerName,
+            BusinessId = review.BusinessId,
+            ReviewerId = review.ReviewerId,
             ReviewTitle = review.ReviewTitle,
             ReviewGrade = review.ReviewGrade,
             ReviewDescription = review.ReviewDescription,

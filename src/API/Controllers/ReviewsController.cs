@@ -1,6 +1,4 @@
-using BusinessReviewer.Application.Common.Exceptions;
 using BusinessReviewer.Application.Reviews.Commands;
-using BusinessReviewer.Domain.Entities;
 
 namespace BusinessReviewer.WebUI.Controllers;
 
@@ -13,17 +11,16 @@ public class ReviewsController : BaseAPIController
         _mediator = mediator;
     }
 
-    // GET all reviews:
+    // GET all reviews.
     [HttpGet]
     public async Task<IActionResult> GetReviewsAsync()
     {
-
-        // Queries the DB through MediatR:
+        // Queries the DB through MediatR.
         var reviews = await _mediator.Send(new GetReviewsQuery());
         return Ok(reviews);
     }
 
-    // GET single review based on its ID:
+    // GET single review based on its ID.
     // The ActionName attribute is here because in CreateReviewAsync(), when we return
     // CreatedAtAction(nameof(GetReviewAsync), new { id = reviewCreated.Id }, reviewCreated),
     // .NET doesn't like the fact that the method ends with "Async", so it trims it.
@@ -40,7 +37,7 @@ public class ReviewsController : BaseAPIController
         return Ok(review);
     }
 
-    // POST a single review:
+    // POST a single review.
     // We don't have to use the [FromBody] attribute before Review review here because
     // we already put [ApiController] decorating BaseAPIController. This means that
     // HttpPost is smart enough to know that the review argument will be passed as
@@ -50,11 +47,11 @@ public class ReviewsController : BaseAPIController
     {
         var reviewCreated = await _mediator.Send(new CreateReviewCommand { Review = review });
 
-        // This method allows us to return the item and its GET URI (with a 201 status):
+        // This method allows us to return the item and its GET URI (with a 201 status).
         return CreatedAtAction(nameof(GetReviewAsync), new { id = reviewCreated.Id }, reviewCreated);
     }
 
-    // PUT a single review:
+    // PUT a single review.
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateReviewAsync(Guid id, Review review)
     {
@@ -69,7 +66,7 @@ public class ReviewsController : BaseAPIController
         }
     }
 
-    // DELETE a single review:
+    // DELETE a single review.
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteReviewAsync(Guid id)
     {

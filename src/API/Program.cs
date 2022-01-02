@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     if (builder.Environment.IsDevelopment())
     {
-        options.UseSqlite(builder.Configuration.GetConnectionString("ReviewsSqlite"));
+        options.UseSqlite(builder.Configuration.GetConnectionString("BusinessReviewSqlite"));
     }
 });
 
@@ -22,17 +21,19 @@ builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy", policy =>
     {
         policy.AllowAnyMethod().AllowAnyHeader();
-        // The frontend's origin:
+
+        // The frontend's origin.
         if (builder.Environment.IsDevelopment()) policy.WithOrigins("http://localhost:3000");
     });
 });
 
 builder.Services.AddScoped<IApplicationDBContext, ApplicationDBContext>();
 
-// We need to specify the assembly where all of our queries are located:
+// We need to specify the assembly where all of our queries are located.
 builder.Services.AddMediatR(typeof(GetReviewsQueryHandler).Assembly);
+builder.Services.AddMediatR(typeof(GetBusinessesQueryHandler).Assembly);
 
-// We need to specify the assembly where all of our mapping profiles are located:
+// We need to specify the assembly where all of our mapping profiles are located.
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 var app = builder.Build();
@@ -60,7 +61,7 @@ if (app.Environment.IsDevelopment())
     {
         var applicationDBContext = services.GetRequiredService<ApplicationDBContext>();
         await applicationDBContext.Database.MigrateAsync();
-        await ApplicationDBContextSeeds.SeedDataToDBAsync(applicationDBContext);
+        await ApplicationDBContextSeeds.SeedReviews(applicationDBContext);
     }
     catch (Exception exception)
     {

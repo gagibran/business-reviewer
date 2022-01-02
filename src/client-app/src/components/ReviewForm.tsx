@@ -1,19 +1,13 @@
 import { useRef } from "react";
-import { FormReview } from "../interfaces/formReview";
+import { FormReview } from "../common/interfaces/formReview";
 import { AiOutlineClose } from "react-icons/ai";
-import { BUSINESS_TYPES, TIMEOUT } from "../constants/reviewFormConstants";
+import { TIMEOUT } from "../common/constants/formConstants";
 import ReviewStar from "./ReviewStar";
-import "../styles/ReviewForm.scss";
+import "../styles/AppForm.scss";
+import { animateOverlayFadeout } from "../common/functions/functions";
 
-const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
+const ReviewForm = function ({ reviewerId, businessId }: FormReview) {
     const overlayRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-
-    const animateOverlayFadeout = function (overlay: any, timeout: number) {
-        overlay.classList.add('review-form-overlay--fadeout');
-        setTimeout(() => {
-            overlay?.classList.add('review-form-overlay--hidden');
-        }, timeout);
-    };
 
     const createReviewStars = function (maxGrade: number) {
         let reviewStars = [];
@@ -26,51 +20,54 @@ const ReviewForm = function ({ reviewerName, reviewerUsername }: FormReview) {
     return (
         <div
             id="reviewFormOverlay"
-            className="review-form-overlay review-form-overlay--fadeout review-form-overlay--hidden"
+            className="app-form-overlay app-form-overlay--fadeout app-form-overlay--hidden"
             ref={overlayRef}
             onClick={(e) => {
                 if (e.target === overlayRef.current) {
-                    animateOverlayFadeout(overlayRef.current, TIMEOUT);
+                    animateOverlayFadeout(
+                        'app-form-overlay--fadeout',
+                        'app-form-overlay--hidden',
+                        overlayRef.current,
+                        TIMEOUT
+                    );
                 }
             }}
         >
-            <form id="reviewForm" className="review-form">
+            <form id="reviewForm" className="app-form">
                 <AiOutlineClose
-                    className="review-form__close-icon"
+                    className="app-form__close-icon"
                     onClick={() => {
-                        animateOverlayFadeout(overlayRef.current, TIMEOUT);
+                        animateOverlayFadeout(
+                            'app-form-overlay--fadeout',
+                            'app-form-overlay--hidden',
+                            overlayRef.current,
+                            TIMEOUT
+                        );
                     }}
                 />
-                <input type="text" name="reviewerName" id="reviewerName" defaultValue={reviewerName} hidden />
-                <input type="text" name="reviewerUsername" id="reviewerUsername" defaultValue={reviewerUsername} hidden />
-                <label htmlFor="businessAddress">
-                    Business Address
-                    <span className="review-form__required">*</span>
+                <input type="text" name="reviewerId" id="reviewerId" defaultValue={reviewerId} hidden />
+                <input type="text" name="businessId" id="businessId" defaultValue={businessId} hidden />
+                <label htmlFor="businessName">
+                    Business Name
+                    <span className="app-form__required">*</span>
                 </label>
-                <input type="text" name="businessAddress" id="businessAddress" readOnly />
-                <input type="number" name="businessLatitude" id="businessLatitude" step="any" hidden />
-                <input type="number" name="businessLongitude" id="businessLongitude" step="any" hidden />
-                <label htmlFor="businessType">
-                    Business Type
-                    <span className="review-form__required">*</span>
-                </label>
-                <select name="businessType" id="businessType" required>
-                    {BUSINESS_TYPES.map((name, index) => <option key={index} value={name}>{name}</option>)}
-                </select>
-                <label htmlFor="ReviewTitle">
+                <input type="text" name="businessName" id="businessName" readOnly />
+                <label htmlFor="reviewTitle">
                     Title
-                    <span className="review-form__required">*</span>
+                    <span className="app-form__required">*</span>
                 </label>
-                <input type="text" name="ReviewTitle" id="ReviewTitle" required />
-                <label htmlFor="ReviewGrade">
+                <input type="text" name="reviewTitle" id="reviewTitle" required />
+                <label htmlFor="reviewGrade">
                     Grade
-                    <span className="review-form__required">*</span>
+                    <span className="app-form__required">*</span>
                 </label>
-                <div className="review-form__star-container">
+                <div className="app-form__star-container">
                     {createReviewStars(5)}
                 </div>
-                <label htmlFor="ReviewDescription">Description</label>
-                <textarea name="ReviewDescription" id="ReviewDescription" />
+                <label htmlFor="reviewDescription">
+                    Description
+                </label>
+                <textarea name="reviewDescription" id="reviewDescription" />
                 <button type="submit">Submit</button>
             </form>
         </div>

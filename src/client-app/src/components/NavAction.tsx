@@ -1,4 +1,4 @@
-import { Action } from "../interfaces/action";
+import { Action } from "../common/interfaces/action";
 import "../styles/Nav.scss";
 
 const NavAction = function ({ icon, actionRoute, actionName, deactivatedNavClassName }: Action) {

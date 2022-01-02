@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Review } from "../interfaces/review";
+import { Review } from "../common/interfaces/review";
 import "../styles/Reviews.scss";
 
 const Reviews = function () {

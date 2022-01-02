@@ -1,5 +1,5 @@
 import "../styles/ReviewStar.scss";
-import { StarReviewButton } from "../interfaces/starReviewButton";
+import { StarReviewButton } from "../common/interfaces/starReviewButton";
 
 const ReviewStar = function ({ grade }: StarReviewButton) {
     return (

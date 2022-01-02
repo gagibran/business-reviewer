@@ -2,7 +2,9 @@
 @import './common/functions';
 @import './common/constants';
 
-.review-form-overlay {
+.app-form-overlay {
+    display: flex;
+    align-items: center;
     background-color: get-color('overlay');
     position: absolute;
     top: 0;
@@ -24,11 +26,10 @@
     }
 }
 
-.review-form {
+.app-form {
     @include flex-container($direction: column);
     background-color: get-color('light-primary');
     position: relative;
-    top: 4%;
     left: 37.6%;
     padding: 30px;
     border-radius: $review-form-elements-border-radius;

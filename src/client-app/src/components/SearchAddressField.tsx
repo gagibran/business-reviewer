@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { useMap } from "react-leaflet"
 import { EsriProvider, GeoSearchControl } from "leaflet-geosearch"
-import defaultMarkerIcon from "../constants/defaultMarkerIcon"
+import defaultMarkerIcon from "../common/constants/defaultMarkerIcon"
 import "leaflet-geosearch/assets/css/leaflet.css"
 
 const SearchAddressField = () => {
@@ -22,7 +22,7 @@ const SearchAddressField = () => {
                 icon: defaultMarkerIcon,
                 alt: 'Marker',
                 keyboard: true,
-                title: 'Click on this marker to add a review.'
+                title: 'Click on this marker to register this address as a business.'
             }
         });
         map.addControl(searchControl);
@@ -35,9 +35,9 @@ const SearchAddressField = () => {
             e.marker._events.click.push({
                 ctx: undefined,
                 fn: () => {
-                    const reviewFormOverlay = document.getElementById('reviewFormOverlay');
-                    reviewFormOverlay?.classList.remove('review-form-overlay--hidden');
-                    reviewFormOverlay?.classList.remove('review-form-overlay--fadeout');
+                    const businessFormOverlay = document.getElementById('businessFormOverlay');
+                    businessFormOverlay?.classList.remove('app-form-overlay--hidden');
+                    businessFormOverlay?.classList.remove('app-form-overlay--fadeout');
                     // @ts-ignore
                     (document.getElementById('businessAddress') as HTMLInputElement).value = e.location.raw.name;
                     // @ts-ignore

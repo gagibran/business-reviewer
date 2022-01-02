@@ -1,6 +1,6 @@
 import "../styles/Nav.scss";
 import NavAction from "./NavAction";
-import { ProfileInfo } from "../interfaces/profileInfo";
+import { ProfileInfo } from "../common/interfaces/profileInfo";
 import { MdOutlineRateReview } from "react-icons/md";
 import { BiCog } from "react-icons/bi";
 import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";

@@ -1,7 +1,9 @@
-using Application.Common.Mappings;
-using BusinessReviewer.Application.Common.Interfaces;
-using BusinessReviewer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using BusinessReviewer.Infrastructure.Data;
+using BusinessReviewer.Application.Common.Mappings;
+using BusinessReviewer.Application.Common.Interfaces;
+using BusinessReviewer.Application.Businesses.QueryHandlers;
+using BusinessReviewer.Application.Reviews.QueryHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +41,6 @@ builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 app.UseHttpsRedirection();
 
 app.UseRouting();

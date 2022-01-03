@@ -1,9 +1,4 @@
-namespace BusinessReviewer.Application.Businesses.Commands;
-
-public class CreateBusinessCommand : IRequest<Business>
-{
-    public Business Business { get; set; }
-}
+namespace BusinessReviewer.Application.Businesses.CommandHandlers;
 
 public class CreateBusinessCommandHandler : IRequestHandler<CreateBusinessCommand, Business>
 {

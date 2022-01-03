@@ -1,9 +1,4 @@
-namespace BusinessReviewer.Application.Businesses.Queries;
-
-public class GetBusinessQuery : IRequest<Business>
-{
-    public Guid Id { get; set; }
-}
+namespace BusinessReviewer.Application.Businesses.QueryHandlers;
 
 public class GetBusinessQueryHandler : IRequestHandler<GetBusinessQuery, Business>
 {

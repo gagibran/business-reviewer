@@ -1,5 +1,10 @@
 ﻿global using MediatR;
-global using BusinessReviewer.Application.Common.Interfaces;
-global using BusinessReviewer.Domain.Entities;
-global using BusinessReviewer.Application.Common.Exceptions;
 global using AutoMapper;
+global using Microsoft.EntityFrameworkCore;
+global using BusinessReviewer.Domain.Entities;
+global using BusinessReviewer.Application.Common.Interfaces;
+global using BusinessReviewer.Application.Common.Exceptions;
+global using BusinessReviewer.Application.Businesses.Commands;
+global using BusinessReviewer.Application.Businesses.Queries;
+global using BusinessReviewer.Application.Reviews.Commands;
+global using BusinessReviewer.Application.Reviews.Queries;

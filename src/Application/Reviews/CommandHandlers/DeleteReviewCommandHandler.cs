@@ -1,9 +1,4 @@
-namespace BusinessReviewer.Application.Reviews.Commands;
-
-public class DeleteReviewCommand : IRequest
-{
-    public Guid Id { get; set; }
-}
+namespace BusinessReviewer.Application.Reviews.CommandHandlers;
 
 public class DeleteReviewCommandHandler : IRequestHandler<DeleteReviewCommand>
 {

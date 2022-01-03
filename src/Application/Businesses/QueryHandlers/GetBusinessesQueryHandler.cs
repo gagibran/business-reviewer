@@ -1,11 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-
-// Both classes are on the same file to improve discoverability.
-namespace BusinessReviewer.Application.Businesses.Queries;
-
-public class GetBusinessesQuery : IRequest<List<Business>>
-{
-}
+namespace BusinessReviewer.Application.Businesses.QueryHandlers;
 
 public class GetBusinessesQueryHandler : IRequestHandler<GetBusinessesQuery, List<Business>>
 {

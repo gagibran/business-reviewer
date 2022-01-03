@@ -1,4 +1,4 @@
-namespace Application.Common.Mappings;
+namespace BusinessReviewer.Application.Common.Mappings;
 
 // AutoMapper maps equivalent properties from different objects.
 // It needs to be added as a service in the Program class.

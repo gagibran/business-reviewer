@@ -1,11 +1,12 @@
 // More information: https://github.com/PaulLeCam/react-leaflet#react-leaflet-
 
-import "../styles/CustomMap.scss";
+import "../styles/WorldMap.scss";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
-import SearchAddressField from "./SearchAddressField";
+import WorldMapSearchAddressField from "./WorldMapSearchAddressField";
+import MapProps from "../common/types/mapProps";
 
-const CustomMap = function () {
+const WorldMap = function ({ refs }: MapProps) {
     return (
         <main className="map" id="map">
             <MapContainer
@@ -20,10 +21,10 @@ const CustomMap = function () {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <SearchAddressField />
+                <WorldMapSearchAddressField refs={refs} />
             </MapContainer>
         </main>
     );
 };
 
-export default CustomMap;
+export default WorldMap;

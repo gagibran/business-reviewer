@@ -1,18 +1,22 @@
 import { useRef } from "react";
-import { FormReview } from "../common/interfaces/formReview";
 import { AiOutlineClose } from "react-icons/ai";
-import { TIMEOUT } from "../common/constants/formConstants";
-import ReviewStar from "./ReviewStar";
+import { TIMEOUT } from "../common/constants/form";
+import ReviewFormStar from "./ReviewFormStar";
 import "../styles/AppForm.scss";
 import { animateOverlayFadeout } from "../common/functions/functions";
 
-const ReviewForm = function ({ reviewerId, businessId }: FormReview) {
+interface Props {
+    reviewerId: string,
+    businessId: string
+}
+
+const ReviewForm = function ({ reviewerId, businessId }: Props) {
     const overlayRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
     const createReviewStars = function (maxGrade: number) {
         let reviewStars = [];
         for (let index = maxGrade; index > 0; index--) {
-            reviewStars.push(<ReviewStar grade={index.toString()} key={index} />);
+            reviewStars.push(<ReviewFormStar grade={index.toString()} key={index} />);
         }
         return reviewStars;
     };

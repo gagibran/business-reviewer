@@ -1,4 +1,4 @@
-export interface Review {
+export default interface Review {
     id: string;
     businessName: string;
     businessType: string;

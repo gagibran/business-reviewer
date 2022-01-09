@@ -33,7 +33,6 @@ builder.Services.AddScoped<IApplicationDBContext, ApplicationDBContext>();
 
 // We need to specify the assembly where all of our queries are located.
 builder.Services.AddMediatR(typeof(GetReviewsQueryHandler).Assembly);
-builder.Services.AddMediatR(typeof(GetBusinessesQueryHandler).Assembly);
 
 // We need to specify the assembly where all of our mapping profiles are located.
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);

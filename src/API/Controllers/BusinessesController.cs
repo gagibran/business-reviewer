@@ -21,12 +21,13 @@ public class BusinessesController : BaseAPIController
     }
 
     // GET single business based on its ID.
+    [HttpGet("{id}")]
+
     // The ActionName attribute is here because in CreateBusinessAsync(), when we return
     // CreatedAtAction(nameof(GetBusinessAsync), new { id = businessCreated.Id }, businessCreated),
     // .NET doesn't like the fact that the method ends with "Async", so it trims it.
     // ActionName guarantees that "Async" doesn't get trimmed and it works in CreatedAtAction.
     // More info: https://www.josephguadagno.net/2020/07/01/no-route-matches-the-supplied-values.
-    [HttpGet("{id}")]
     [ActionName(nameof(GetBusinessAsync))]
     public async Task<IActionResult> GetBusinessAsync(Guid id)
     {

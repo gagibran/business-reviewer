@@ -1,12 +1,16 @@
-import "../styles/Nav.scss";
-import NavAction from "./NavAction";
-import { ProfileInfo } from "../common/interfaces/profileInfo";
-import { MdOutlineRateReview } from "react-icons/md";
-import { BiCog } from "react-icons/bi";
-import { AiOutlineHome, AiOutlineArrowLeft } from "react-icons/ai";
+import SideNavAction from "./SideNavAction";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useState } from "react";
+import "../styles/SideNav.scss";
+import { SIDE_NAV_ACTIONS } from "../common/constants/sideNav";
 
-const Nav = function ({ userName, profilePictureSrc }: ProfileInfo) {
+interface Props {
+    userName: string,
+    userEmail: string,
+    profilePictureSrc: string
+}
+
+const SideNav = function ({ userName, profilePictureSrc }: Props) {
     const [navbar, setNavbar] = useState(false);
     const deactivatedNavClassName = !navbar ? '--deactivated' : '';
 
@@ -33,26 +37,17 @@ const Nav = function ({ userName, profilePictureSrc }: ProfileInfo) {
                 {userName}
             </p>
             <hr className="side-navbar__separator" />
-            <NavAction
-                deactivatedNavClassName={deactivatedNavClassName}
-                icon={<AiOutlineHome />}
-                actionRoute="/"
-                actionName="Home"
-            />
-            <NavAction
-                deactivatedNavClassName={deactivatedNavClassName}
-                icon={<MdOutlineRateReview />}
-                actionRoute="/"
-                actionName="My Reviews"
-            />
-            <NavAction
-                deactivatedNavClassName={deactivatedNavClassName}
-                icon={<BiCog />}
-                actionRoute="/"
-                actionName="Settings"
-            />
+            {Object.entries(SIDE_NAV_ACTIONS).map(([key, value], index) => {
+                return <SideNavAction
+                    deactivatedNavClassName={deactivatedNavClassName}
+                    icon={<value.icon />}
+                    actionRoute={value.actionRoute}
+                    actionName={value.actionName}
+                    key={key}
+                />
+            })}
         </nav>
     );
 };
 
-export default Nav;
+export default SideNav;

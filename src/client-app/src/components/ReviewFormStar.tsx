@@ -1,7 +1,10 @@
-import "../styles/ReviewStar.scss";
-import { StarReviewButton } from "../common/interfaces/starReviewButton";
+import "../styles/ReviewFormStar.scss";
 
-const ReviewStar = function ({ grade }: StarReviewButton) {
+interface Props {
+    grade: string
+}
+
+const ReviewFormStar = function ({ grade }: Props) {
     return (
         <>
             <input
@@ -29,4 +32,4 @@ const ReviewStar = function ({ grade }: StarReviewButton) {
     );
 };
 
-export default ReviewStar;
+export default ReviewFormStar;

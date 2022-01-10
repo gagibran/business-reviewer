@@ -1,17 +1,17 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { animateOverlayFadeout } from "../common/functions/functions";
 import { BUSINESS_TYPES, TIMEOUT } from "../common/constants/form";
 import { businessesRequests } from "../api/requests";
 import "../styles/AppForm.scss";
-import WorldMap from "./WorldMap";
-import BusinessFormRefs from "../common/types/businessFormRefs";
+import BusinessFormRefs from "../common/interfaces/businessFormRefs";
 
 interface Props {
     userId: string,
+    businessFormRefs: BusinessFormRefs
 }
 
-const BusinessForm = function ({ userId }: Props) {
+const BusinessForm = function ({ userId, businessFormRefs }: Props) {
     const [inputs, setInputs] = useState({
         userId: '',
         businessName: '',
@@ -21,30 +21,21 @@ const BusinessForm = function ({ userId }: Props) {
         businessLongitude: 0
     });
 
-    const refs: BusinessFormRefs = {
-        overlayRef: useRef() as React.MutableRefObject<HTMLInputElement>,
-        businessLongitudeRef: useRef() as React.MutableRefObject<HTMLInputElement>,
-        businessLatitudeRef: useRef() as React.MutableRefObject<HTMLInputElement>,
-        businessNameRef: useRef() as React.MutableRefObject<HTMLInputElement>,
-        businessAddressRef: useRef() as React.MutableRefObject<HTMLInputElement>,
-        businessTypeRef: useRef() as React.MutableRefObject<HTMLSelectElement>
-    }
-
     const handleSubmitButton = function () {
         setInputs({
             userId: userId,
-            businessLongitude: +refs.businessLongitudeRef.current.value,
-            businessLatitude: +refs.businessLatitudeRef.current.value,
-            businessAddress: refs.businessAddressRef.current.value,
-            businessName: refs.businessNameRef.current.value,
-            businessType: refs.businessTypeRef.current.value
+            businessLongitude: +businessFormRefs.businessLongitudeRef.current.value,
+            businessLatitude: +businessFormRefs.businessLatitudeRef.current.value,
+            businessAddress: businessFormRefs.businessAddressRef.current.value,
+            businessName: businessFormRefs.businessNameRef.current.value,
+            businessType: businessFormRefs.businessTypeRef.current.value
         });
-        if (refs.businessNameRef.current.value !== ''
-            && refs.businessTypeRef.current.value !== '') {
+        if (businessFormRefs.businessNameRef.current.value !== ''
+            && businessFormRefs.businessTypeRef.current.value !== '') {
             animateOverlayFadeout(
                 'app-form-overlay--fadeout',
                 'app-form-overlay--hidden',
-                refs.overlayRef.current,
+                businessFormRefs.overlayRef.current,
                 TIMEOUT
             );
         }
@@ -61,17 +52,16 @@ const BusinessForm = function ({ userId }: Props) {
 
     return (
         <>
-            <WorldMap refs={refs} />
             <div
                 id="businessFormOverlay"
                 className="app-form-overlay app-form-overlay--fadeout app-form-overlay--hidden"
-                ref={refs.overlayRef}
+                ref={businessFormRefs.overlayRef}
                 onClick={(e) => {
-                    if (e.target === refs.overlayRef.current) {
+                    if (e.target === businessFormRefs.overlayRef.current) {
                         animateOverlayFadeout(
                             'app-form-overlay--fadeout',
                             'app-form-overlay--hidden',
-                            refs.overlayRef.current,
+                            businessFormRefs.overlayRef.current,
                             TIMEOUT
                         );
                     }
@@ -84,7 +74,7 @@ const BusinessForm = function ({ userId }: Props) {
                             animateOverlayFadeout(
                                 'app-form-overlay--fadeout',
                                 'app-form-overlay--hidden',
-                                refs.overlayRef.current,
+                                businessFormRefs.overlayRef.current,
                                 TIMEOUT
                             );
                         }}
@@ -94,7 +84,7 @@ const BusinessForm = function ({ userId }: Props) {
                         name="businessLongitude"
                         id="businessLongitude"
                         step="any"
-                        ref={refs.businessLongitudeRef}
+                        ref={businessFormRefs.businessLongitudeRef}
                         hidden
                     />
                     <input
@@ -102,7 +92,7 @@ const BusinessForm = function ({ userId }: Props) {
                         name="businessLatitude"
                         id="businessLatitude"
                         step="any"
-                        ref={refs.businessLatitudeRef}
+                        ref={businessFormRefs.businessLatitudeRef}
                         hidden
                     />
                     <label htmlFor="businessAddress">
@@ -113,7 +103,7 @@ const BusinessForm = function ({ userId }: Props) {
                         type="text"
                         name="businessAddress"
                         id="businessAddress"
-                        ref={refs.businessAddressRef}
+                        ref={businessFormRefs.businessAddressRef}
                         readOnly
                     />
                     <label htmlFor="businessName">
@@ -124,7 +114,7 @@ const BusinessForm = function ({ userId }: Props) {
                         type="text"
                         name="businessName"
                         id="businessName"
-                        ref={refs.businessNameRef}
+                        ref={businessFormRefs.businessNameRef}
                         required
                     />
                     <label htmlFor="businessType">
@@ -134,7 +124,7 @@ const BusinessForm = function ({ userId }: Props) {
                     <select
                         name="businessType"
                         id="businessType"
-                        ref={refs.businessTypeRef}
+                        ref={businessFormRefs.businessTypeRef}
                         required
                     >
                         {BUSINESS_TYPES.map((name, index) => <option key={index} value={name}>{name}</option>)}

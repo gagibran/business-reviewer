@@ -1,12 +1,12 @@
 // More information: https://github.com/PaulLeCam/react-leaflet#react-leaflet-
 
-import "../styles/WorldMap.scss";
-import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import WorldMapSearchAddressField from "./WorldMapSearchAddressField";
-import MapProps from "../common/types/mapProps";
+import MapProps from "../common/interfaces/mapProps";
+import "../styles/WorldMap.scss";
+import "leaflet/dist/leaflet.css";
 
-const WorldMap = function ({ refs }: MapProps) {
+const WorldMap = function ({ businessFormRefs }: MapProps) {
     return (
         <main className="map" id="map">
             <MapContainer
@@ -21,7 +21,7 @@ const WorldMap = function ({ refs }: MapProps) {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <WorldMapSearchAddressField refs={refs} />
+                <WorldMapSearchAddressField businessFormRefs={businessFormRefs} />
             </MapContainer>
         </main>
     );

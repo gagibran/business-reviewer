@@ -4,11 +4,11 @@ import { useEffect } from "react"
 import { useMap } from "react-leaflet"
 import { EsriProvider, GeoSearchControl } from "leaflet-geosearch"
 import { defaultMarkerIcon } from "../common/constants/defaultMarkerIcon"
-import MapProps from "../common/types/mapProps"
+import MapProps from "../common/interfaces/mapProps"
 import "leaflet-geosearch/assets/css/leaflet.css"
-import LeafletLocationEvent from "../common/types/leafletExtentions";
+import LeafletLocationEvent from "../common/interfaces/leafletExtentions";
 
-const WorldMapSearchAddressField = function ({ refs }: MapProps) {
+const WorldMapSearchAddressField = function ({ businessFormRefs }: MapProps) {
     const map = useMap();
 
     // @ts-ignore
@@ -36,11 +36,11 @@ const WorldMapSearchAddressField = function ({ refs }: MapProps) {
             (e as LeafletLocationEvent).marker._events.click.push({
                 ctx: undefined,
                 fn: () => {
-                    refs.overlayRef.current.classList.remove('app-form-overlay--hidden');
-                    refs.overlayRef.current.classList.remove('app-form-overlay--fadeout');
-                    refs.businessAddressRef.current.value = (e as LeafletLocationEvent).location.raw.name;
-                    refs.businessLatitudeRef.current.value = ((e as LeafletLocationEvent).location.x).toString();
-                    refs.businessLongitudeRef.current.value = ((e as LeafletLocationEvent).location.y).toString();
+                    businessFormRefs.overlayRef.current.classList.remove('app-form-overlay--hidden');
+                    businessFormRefs.overlayRef.current.classList.remove('app-form-overlay--fadeout');
+                    businessFormRefs.businessAddressRef.current.value = (e as LeafletLocationEvent).location.raw.name;
+                    businessFormRefs.businessLatitudeRef.current.value = ((e as LeafletLocationEvent).location.x).toString();
+                    businessFormRefs.businessLongitudeRef.current.value = ((e as LeafletLocationEvent).location.y).toString();
                 }
             });
         });

@@ -51,88 +51,86 @@ const BusinessForm = function ({ userId, businessFormRefs }: Props) {
     };
 
     return (
-        <>
-            <div
-                id="businessFormOverlay"
-                className="app-form-overlay app-form-overlay--fadeout app-form-overlay--hidden"
-                ref={businessFormRefs.overlayRef}
-                onClick={(e) => {
-                    if (e.target === businessFormRefs.overlayRef.current) {
+        <div
+            id="businessFormOverlay"
+            className="app-form-overlay app-form-overlay--fadeout app-form-overlay--hidden"
+            ref={businessFormRefs.overlayRef}
+            onClick={(e) => {
+                if (e.target === businessFormRefs.overlayRef.current) {
+                    animateOverlayFadeout(
+                        'app-form-overlay--fadeout',
+                        'app-form-overlay--hidden',
+                        businessFormRefs.overlayRef.current,
+                        TIMEOUT
+                    );
+                }
+            }}
+        >
+            <form id="reviewForm" className="app-form" onSubmit={handleSubmit}>
+                <AiOutlineClose
+                    className="app-form__close-icon"
+                    onClick={() => {
                         animateOverlayFadeout(
                             'app-form-overlay--fadeout',
                             'app-form-overlay--hidden',
                             businessFormRefs.overlayRef.current,
                             TIMEOUT
                         );
-                    }
-                }}
-            >
-                <form id="reviewForm" className="app-form" onSubmit={handleSubmit}>
-                    <AiOutlineClose
-                        className="app-form__close-icon"
-                        onClick={() => {
-                            animateOverlayFadeout(
-                                'app-form-overlay--fadeout',
-                                'app-form-overlay--hidden',
-                                businessFormRefs.overlayRef.current,
-                                TIMEOUT
-                            );
-                        }}
-                    />
-                    <input
-                        type="number"
-                        name="businessLongitude"
-                        id="businessLongitude"
-                        step="any"
-                        ref={businessFormRefs.businessLongitudeRef}
-                        hidden
-                    />
-                    <input
-                        type="number"
-                        name="businessLatitude"
-                        id="businessLatitude"
-                        step="any"
-                        ref={businessFormRefs.businessLatitudeRef}
-                        hidden
-                    />
-                    <label htmlFor="businessAddress">
-                        Business Address
-                        <span className="app-form__required">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        name="businessAddress"
-                        id="businessAddress"
-                        ref={businessFormRefs.businessAddressRef}
-                        readOnly
-                    />
-                    <label htmlFor="businessName">
-                        Business Name
-                        <span className="app-form__required">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        name="businessName"
-                        id="businessName"
-                        ref={businessFormRefs.businessNameRef}
-                        required
-                    />
-                    <label htmlFor="businessType">
-                        Business Type
-                        <span className="app-form__required">*</span>
-                    </label>
-                    <select
-                        name="businessType"
-                        id="businessType"
-                        ref={businessFormRefs.businessTypeRef}
-                        required
-                    >
-                        {BUSINESS_TYPES.map((name, index) => <option key={index} value={name}>{name}</option>)}
-                    </select>
-                    <button type="submit" onClick={handleSubmitButton}>Submit</button>
-                </form>
-            </div>
-        </>
+                    }}
+                />
+                <input
+                    type="number"
+                    name="businessLongitude"
+                    id="businessLongitude"
+                    step="any"
+                    ref={businessFormRefs.businessLongitudeRef}
+                    hidden
+                />
+                <input
+                    type="number"
+                    name="businessLatitude"
+                    id="businessLatitude"
+                    step="any"
+                    ref={businessFormRefs.businessLatitudeRef}
+                    hidden
+                />
+                <label htmlFor="businessAddress">
+                    Business Address
+                    <span className="app-form__required">*</span>
+                </label>
+                <input
+                    type="text"
+                    name="businessAddress"
+                    id="businessAddress"
+                    ref={businessFormRefs.businessAddressRef}
+                    readOnly
+                />
+                <label htmlFor="businessName">
+                    Business Name
+                    <span className="app-form__required">*</span>
+                </label>
+                <input
+                    type="text"
+                    name="businessName"
+                    id="businessName"
+                    ref={businessFormRefs.businessNameRef}
+                    required
+                />
+                <label htmlFor="businessType">
+                    Business Type
+                    <span className="app-form__required">*</span>
+                </label>
+                <select
+                    name="businessType"
+                    id="businessType"
+                    ref={businessFormRefs.businessTypeRef}
+                    required
+                >
+                    {BUSINESS_TYPES.map((name, index) => <option key={index} value={name}>{name}</option>)}
+                </select>
+                <button type="submit" onClick={handleSubmitButton}>Submit</button>
+            </form>
+        </div>
     );
 };
 

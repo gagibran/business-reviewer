@@ -1,24 +1,21 @@
-import { useEffect, useState } from "react";
-import { reviewsRequests } from "../api/requests";
-import Review from "../common/entities/review";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import { useStore } from "../stores/store";
 import "../styles/Reviews.scss";
 
 const Reviews = function () {
+    // This store is responsible for updating the reviews array on the page
+    // by fetching the API and loading the reviews with its response.
+    const { reviewStore } = useStore();
 
-    // This is responsible for updating the reviews array on the page.
-    // We're typing "reviews" to an array of the "Review" interface.
-    const [reviews, setReviews] = useState<Review[]>([]);
-
-    // This is responsible for fetching the API and updating reviews (using setReviews) with its response.
+    // This hook is responsible for updating the reviews whenever there's a change.
     useEffect(() => {
-
-        // The get() method also returns an array of "Reviews".
-        reviewsRequests.get('/').then(res => setReviews(res.data));
-    }, []);
+        reviewStore.loadReviewsFromDb();
+    }, [reviewStore]);
 
     return (
         <main id="reviews">
-            {reviews.map((review) => (
+            {reviewStore.reviews.map((review) => (
                 <a href="/" key={review.id}>
                     {review.businessName}
                 </a>
@@ -27,4 +24,4 @@ const Reviews = function () {
     );
 };
 
-export default Reviews;
+export default observer(Reviews);

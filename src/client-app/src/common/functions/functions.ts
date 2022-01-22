@@ -1,4 +1,4 @@
-export function animateOverlayFadeout(
+export const animateOverlayFadeout = function (
     overlayFadeoutClass: string,
     overlayHiddenClass: string,
     overlay: any,

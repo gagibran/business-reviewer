@@ -1,10 +1,11 @@
-import { FormEvent, useState } from "react";
+import BusinessFormRefs from "../common/interfaces/businessFormRefs";
+import { FormEvent } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { animateOverlayFadeout } from "../common/functions/functions";
 import { BUSINESS_TYPES, TIMEOUT } from "../common/constants/form";
-import { businessesRequests } from "../api/requests";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../stores/store";
 import "../styles/AppForm.scss";
-import BusinessFormRefs from "../common/interfaces/businessFormRefs";
 
 interface Props {
     userId: string,
@@ -12,24 +13,9 @@ interface Props {
 }
 
 const BusinessForm = function ({ userId, businessFormRefs }: Props) {
-    const [inputs, setInputs] = useState({
-        userId: '',
-        businessName: '',
-        businessAddress: '',
-        businessType: '',
-        businessLatitude: 0,
-        businessLongitude: 0
-    });
+    const { businessStore } = useStore();
 
     const handleSubmitButton = function () {
-        setInputs({
-            userId: userId,
-            businessLongitude: +businessFormRefs.businessLongitudeRef.current.value,
-            businessLatitude: +businessFormRefs.businessLatitudeRef.current.value,
-            businessAddress: businessFormRefs.businessAddressRef.current.value,
-            businessName: businessFormRefs.businessNameRef.current.value,
-            businessType: businessFormRefs.businessTypeRef.current.value
-        });
         if (businessFormRefs.businessNameRef.current.value !== ''
             && businessFormRefs.businessTypeRef.current.value !== '') {
             animateOverlayFadeout(
@@ -43,11 +29,14 @@ const BusinessForm = function ({ userId, businessFormRefs }: Props) {
 
     const handleSubmit = async function (e: FormEvent) {
         e.preventDefault();
-        try {
-            await businessesRequests.post('', inputs);
-        } catch (error) {
-            console.log(error);
-        }
+        await businessStore.postBusiness(
+            userId,
+            businessFormRefs.businessNameRef.current.value,
+            businessFormRefs.businessAddressRef.current.value,
+            businessFormRefs.businessTypeRef.current.value,
+            +businessFormRefs.businessLatitudeRef.current.value,
+            +businessFormRefs.businessLongitudeRef.current.value
+        );
     };
 
     return (
@@ -66,17 +55,17 @@ const BusinessForm = function ({ userId, businessFormRefs }: Props) {
                 }
             }}
         >
-            <form id="reviewForm" className="app-form" onSubmit={handleSubmit}>
+            <form id="businessForm" className="app-form" onSubmit={handleSubmit}>
                 <AiOutlineClose
                     className="app-form__close-icon"
-                    onClick={() => {
-                        animateOverlayFadeout(
+                    onClick={
+                        animateOverlayFadeout.bind(
+                            null,
                             'app-form-overlay--fadeout',
                             'app-form-overlay--hidden',
                             businessFormRefs.overlayRef.current,
                             TIMEOUT
-                        );
-                    }}
+                        )}
                 />
                 <input
                     type="number"
@@ -134,4 +123,6 @@ const BusinessForm = function ({ userId, businessFormRefs }: Props) {
     );
 };
 
-export default BusinessForm;
+// observer() is a high-order function from MobX that allows the component to
+// become an observer.
+export default observer(BusinessForm);

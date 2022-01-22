@@ -13,8 +13,7 @@ const WorldMapSearchAddressField = function ({ businessFormRefs }: MapProps) {
 
     // @ts-ignore
     useEffect(() => {
-        // @ts-ignore
-        const searchControl = new GeoSearchControl({
+        const searchControl = new (GeoSearchControl as any)({
             style: 'bar',
             autoCompleteDelay: 250,
             provider: new EsriProvider(),

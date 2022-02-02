@@ -12,7 +12,7 @@ public class CreateReviewCommandHandler : IRequestHandler<CreateReviewCommand, R
     public async Task<Review> Handle(CreateReviewCommand request, CancellationToken cancellationToken)
     {
         Review review = request.Review;
-        Review reviewCreated = new()
+        var reviewCreated = new Review
         {
             Id = Guid.NewGuid(),
             BusinessId = review.BusinessId,

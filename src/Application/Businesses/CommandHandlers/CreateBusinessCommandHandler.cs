@@ -12,7 +12,7 @@ public class CreateBusinessCommandHandler : IRequestHandler<CreateBusinessComman
     public async Task<Business> Handle(CreateBusinessCommand request, CancellationToken cancellationToken)
     {
         Business business = request.Business;
-        Business businessCreated = new()
+        var businessCreated = new Business
         {
             Id = Guid.NewGuid(),
             UserId = business.UserId,

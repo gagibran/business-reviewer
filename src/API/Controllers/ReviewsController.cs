@@ -16,7 +16,7 @@ public class ReviewsController : BaseAPIController
     public async Task<IActionResult> GetReviewsAsync()
     {
         // Queries the DB through MediatR.
-        var reviews = await _mediator.Send(new GetReviewsQuery());
+        List<Review> reviews = await _mediator.Send(new GetReviewsQuery());
         return Ok(reviews);
     }
 
@@ -30,7 +30,7 @@ public class ReviewsController : BaseAPIController
     [ActionName(nameof(GetReviewAsync))]
     public async Task<IActionResult> GetReviewAsync(Guid id)
     {
-        var review = await _mediator.Send(new GetReviewQuery { Id = id });
+        Review review = await _mediator.Send(new GetReviewQuery { Id = id });
 
         if (review is null) return NotFound();
 
@@ -45,7 +45,7 @@ public class ReviewsController : BaseAPIController
     [HttpPost]
     public async Task<IActionResult> CreateReviewAsync(Review review)
     {
-        var reviewCreated = await _mediator.Send(new CreateReviewCommand { Review = review });
+        Review reviewCreated = await _mediator.Send(new CreateReviewCommand { Review = review });
 
         // This method allows us to return the item and its GET URI (with a 201 status).
         return CreatedAtAction(nameof(GetReviewAsync), new { id = reviewCreated.Id }, reviewCreated);

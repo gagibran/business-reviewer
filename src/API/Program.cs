@@ -2,10 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using BusinessReviewer.Infrastructure.Data;
 using BusinessReviewer.Application.Common.Mappings;
 using BusinessReviewer.Application.Common.Interfaces;
-using BusinessReviewer.Application.Businesses.QueryHandlers;
 using BusinessReviewer.Application.Reviews.QueryHandlers;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -37,7 +36,7 @@ builder.Services.AddMediatR(typeof(GetReviewsQueryHandler).Assembly);
 // We need to specify the assembly where all of our mapping profiles are located.
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
@@ -55,17 +54,17 @@ if (app.Environment.IsDevelopment())
 {
     // Creates the databases (and their tables) from a seed if they don't exist.
     // This replaces: dotnet ef database update.
-    using var scope = app.Services.CreateScope();
-    var services = scope.ServiceProvider;
+    using IServiceScope scope = app.Services.CreateScope();
+    IServiceProvider services = scope.ServiceProvider;
     try
     {
-        var applicationDBContext = services.GetRequiredService<ApplicationDBContext>();
+        ApplicationDBContext applicationDBContext = services.GetRequiredService<ApplicationDBContext>();
         await applicationDBContext.Database.MigrateAsync();
         await ApplicationDBContextSeeds.SeedReviews(applicationDBContext);
     }
     catch (Exception exception)
     {
-        var logger = services.GetRequiredService<ILogger<Program>>();
+        ILogger<Program> logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(exception, "An error ocurred during migration.");
     }
 }

@@ -16,7 +16,7 @@ public class BusinessesController : BaseAPIController
     public async Task<IActionResult> GetBusinessesAsync()
     {
         // Queries the DB through MediatR.
-        var businesses = await _mediator.Send(new GetBusinessesQuery());
+        List<Business> businesses = await _mediator.Send(new GetBusinessesQuery());
         return Ok(businesses);
     }
 
@@ -31,7 +31,7 @@ public class BusinessesController : BaseAPIController
     [ActionName(nameof(GetBusinessAsync))]
     public async Task<IActionResult> GetBusinessAsync(Guid id)
     {
-        var business = await _mediator.Send(new GetBusinessQuery { Id = id });
+        Business business = await _mediator.Send(new GetBusinessQuery { Id = id });
 
         if (business is null) return NotFound();
 
@@ -46,7 +46,7 @@ public class BusinessesController : BaseAPIController
     [HttpPost]
     public async Task<IActionResult> CreateBusinessAsync(Business business)
     {
-        var businessCreated = await _mediator.Send(new CreateBusinessCommand { Business = business });
+        Business businessCreated = await _mediator.Send(new CreateBusinessCommand { Business = business });
 
         // This method allows us to return the item and its GET URI (with a 201 status).
         return CreatedAtAction(nameof(GetBusinessAsync), new { id = businessCreated.Id }, businessCreated);

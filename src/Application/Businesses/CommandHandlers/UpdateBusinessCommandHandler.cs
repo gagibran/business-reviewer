@@ -15,7 +15,7 @@ public class UpdateBusinessCommandHandler : IRequestHandler<UpdateBusinessComman
     // is essentially just an empty object stating that the operation was successfull:
     public async Task<Unit> Handle(UpdateBusinessCommand request, CancellationToken cancellationToken)
     {
-        var businessUpdated = await _applicationDBContext.Businesses.FindAsync(request.Id);
+        Business businessUpdated = await _applicationDBContext.Businesses.FindAsync(request.Id);
 
         if (businessUpdated is null) throw new NotFoundException();
 

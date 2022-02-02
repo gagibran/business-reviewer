@@ -15,7 +15,7 @@ public class UpdateReviewCommandHandler : IRequestHandler<UpdateReviewCommand>
     // is essentially just an empty object stating that the operation was successfull:
     public async Task<Unit> Handle(UpdateReviewCommand request, CancellationToken cancellationToken)
     {
-        var reviewUpdated = await _applicationDBContext.Reviews.FindAsync(request.Id);
+        Review reviewUpdated = await _applicationDBContext.Reviews.FindAsync(request.Id);
 
         if (reviewUpdated is null) throw new NotFoundException();
 

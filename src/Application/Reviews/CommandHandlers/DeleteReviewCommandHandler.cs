@@ -11,7 +11,7 @@ public class DeleteReviewCommandHandler : IRequestHandler<DeleteReviewCommand>
 
     public async Task<Unit> Handle(DeleteReviewCommand request, CancellationToken cancellationToken)
     {
-        var reviewDeleted = await _applicationDBContext.Reviews.FindAsync(request.Id);
+        Review reviewDeleted = await _applicationDBContext.Reviews.FindAsync(request.Id);
 
         if (reviewDeleted is null) throw new NotFoundException();
 

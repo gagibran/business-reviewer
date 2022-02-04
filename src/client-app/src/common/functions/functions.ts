@@ -5,7 +5,10 @@ export const animateOverlayFadeout = function (
     timeout: number
 ) {
     overlay.classList.add(overlayFadeoutClass);
-    setTimeout(() => {
-        overlay?.classList.add(overlayHiddenClass);
-    }, timeout);
+    setTimeout(
+        () => {
+            overlay?.classList.add(overlayHiddenClass);
+        },
+        timeout
+    );
 };

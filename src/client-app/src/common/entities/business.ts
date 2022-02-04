@@ -1,4 +1,5 @@
 export default interface Business {
+    id: string,
     userId: string,
     businessName: string,
     businessAddress: string,

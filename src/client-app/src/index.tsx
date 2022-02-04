@@ -2,16 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import App from "./components/App";
-import { store, StoreContext } from "./stores/store";
 
 ReactDOM.render(
     <React.StrictMode>
-        {/* Providing the store context to the whole app. */}
-        {/* By doing that, every component can access the states */}
-        {/* stored in the store. */}
-        <StoreContext.Provider value={store}>
-            <App />
-        </StoreContext.Provider>
+        <App />
     </React.StrictMode>,
     document.getElementById('root')
 );

@@ -1,97 +1,103 @@
-import BusinessFormRefs from "../common/interfaces/businessFormRefs";
-import { FormEvent } from "react";
+import AppFormOverlay from "./AppFormOverlay";
 import { AiOutlineClose } from "react-icons/ai";
 import { animateOverlayFadeout } from "../common/functions/functions";
 import { BUSINESS_TYPES, TIMEOUT } from "../common/constants/form";
-import { observer } from "mobx-react-lite";
-import { useStore } from "../stores/store";
+import { ChangeEvent, MutableRefObject, useState } from "react";
+import { businessesRequests } from "../api/requests";
 import "../styles/AppForm.scss";
 
 interface Props {
     userId: string,
-    businessFormRefs: BusinessFormRefs
+    businessAddressRef: MutableRefObject<HTMLInputElement>,
+    businessLatitudeRef: MutableRefObject<HTMLInputElement>,
+    businessLongitudeRef: MutableRefObject<HTMLInputElement>,
+    businessFormOverlayRef: MutableRefObject<HTMLDivElement>,
 }
 
-const BusinessForm = function ({ userId, businessFormRefs }: Props) {
-    const { businessStore } = useStore();
+const BusinessForm = function (
+    {
+        userId,
+        businessAddressRef,
+        businessLatitudeRef,
+        businessLongitudeRef,
+        businessFormOverlayRef
+    }: Props
+) {
+    const [businessName, setBusinessName] = useState('');
+    const [businessType, setBusinessType] = useState('');
 
-    const handleSubmitButton = function () {
-        if (businessFormRefs.businessNameRef.current.value !== ''
-            && businessFormRefs.businessTypeRef.current.value !== '') {
+    const businessNameHandler = function (e: ChangeEvent<HTMLInputElement>) {
+        setBusinessName(e.target.value);
+    };
+
+    const businessTypeHandler = function (e: ChangeEvent<HTMLSelectElement>) {
+        setBusinessType(e.target.value);
+    };
+
+    const formSubmitHandler = async function (e: ChangeEvent<HTMLFormElement>) {
+        e.preventDefault();
+        try {
+            await businessesRequests.post(
+                '',
+                {
+                    userId,
+                    businessName,
+                    businessAddress: businessAddressRef.current.value,
+                    businessType,
+                    businessLatitude: +businessLatitudeRef.current.value,
+                    businessLongitude: +businessLongitudeRef.current.value,
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setBusinessName('');
+            setBusinessType('');
+        }
+    };
+
+    const submitButtonHandler = function () {
+        if (businessName !== '' && businessType !== '') {
             animateOverlayFadeout(
                 'app-form-overlay--fadeout',
                 'app-form-overlay--hidden',
-                businessFormRefs.overlayRef.current,
+                businessFormOverlayRef.current,
                 TIMEOUT
             );
         }
     };
 
-    const handleSubmit = async function (e: FormEvent) {
-        e.preventDefault();
-        await businessStore.postBusiness(
-            userId,
-            businessFormRefs.businessNameRef.current.value,
-            businessFormRefs.businessAddressRef.current.value,
-            businessFormRefs.businessTypeRef.current.value,
-            +businessFormRefs.businessLatitudeRef.current.value,
-            +businessFormRefs.businessLongitudeRef.current.value
+    const formCloseHandler = function () {
+        animateOverlayFadeout(
+            'app-form-overlay--fadeout',
+            'app-form-overlay--hidden',
+            businessFormOverlayRef.current,
+            TIMEOUT
         );
     };
 
     return (
-        <div
-            id="businessFormOverlay"
-            className="app-form-overlay app-form-overlay--fadeout app-form-overlay--hidden"
-            ref={businessFormRefs.overlayRef}
-            onClick={(e) => {
-                if (e.target === businessFormRefs.overlayRef.current) {
-                    animateOverlayFadeout(
-                        'app-form-overlay--fadeout',
-                        'app-form-overlay--hidden',
-                        businessFormRefs.overlayRef.current,
-                        TIMEOUT
-                    );
-                }
-            }}
-        >
-            <form id="businessForm" className="app-form" onSubmit={handleSubmit}>
+        <AppFormOverlay id="businessFormOverlay" overlayRef={businessFormOverlayRef}>
+            <form
+                id="businessForm"
+                className="app-form"
+                onSubmit={formSubmitHandler}
+            >
                 <AiOutlineClose
                     className="app-form__close-icon"
-                    onClick={
-                        animateOverlayFadeout.bind(
-                            null,
-                            'app-form-overlay--fadeout',
-                            'app-form-overlay--hidden',
-                            businessFormRefs.overlayRef.current,
-                            TIMEOUT
-                        )}
-                />
-                <input
-                    type="number"
-                    name="businessLongitude"
-                    id="businessLongitude"
-                    step="any"
-                    ref={businessFormRefs.businessLongitudeRef}
-                    hidden
-                />
-                <input
-                    type="number"
-                    name="businessLatitude"
-                    id="businessLatitude"
-                    step="any"
-                    ref={businessFormRefs.businessLatitudeRef}
-                    hidden
+                    onClick={formCloseHandler}
                 />
                 <label htmlFor="businessAddress">
                     Business Address
                     <span className="app-form__required">*</span>
                 </label>
+                <input ref={businessLatitudeRef} hidden />
+                <input ref={businessLongitudeRef} hidden />
                 <input
                     type="text"
                     name="businessAddress"
                     id="businessAddress"
-                    ref={businessFormRefs.businessAddressRef}
+                    ref={businessAddressRef}
                     readOnly
                 />
                 <label htmlFor="businessName">
@@ -102,7 +108,8 @@ const BusinessForm = function ({ userId, businessFormRefs }: Props) {
                     type="text"
                     name="businessName"
                     id="businessName"
-                    ref={businessFormRefs.businessNameRef}
+                    value={businessName}
+                    onChange={businessNameHandler}
                     required
                 />
                 <label htmlFor="businessType">
@@ -112,17 +119,21 @@ const BusinessForm = function ({ userId, businessFormRefs }: Props) {
                 <select
                     name="businessType"
                     id="businessType"
-                    ref={businessFormRefs.businessTypeRef}
+                    value={businessType}
+                    onChange={businessTypeHandler}
                     required
                 >
-                    {BUSINESS_TYPES.map((name, index) => <option key={index} value={name}>{name}</option>)}
+                    <option value=""></option>
+                    {BUSINESS_TYPES.map((name, index) => {
+                        return <option key={index} value={name}>{name}</option>
+                    })}
                 </select>
-                <button type="submit" onClick={handleSubmitButton}>Submit</button>
+                <button type="submit" onClick={submitButtonHandler}>
+                    Submit
+                </button>
             </form>
-        </div>
+        </AppFormOverlay>
     );
 };
 
-// observer() is a high-order function from MobX that allows the component to
-// become an observer.
-export default observer(BusinessForm);
+export default BusinessForm;

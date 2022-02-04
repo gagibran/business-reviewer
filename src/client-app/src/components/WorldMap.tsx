@@ -2,11 +2,25 @@
 
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import WorldMapSearchAddressField from "./WorldMapSearchAddressField";
-import MapProps from "../common/interfaces/mapProps";
 import "../styles/WorldMap.scss";
 import "leaflet/dist/leaflet.css";
+import { MutableRefObject } from "react";
 
-const WorldMap = function ({ businessFormRefs }: MapProps) {
+interface Props {
+    businessAddressRef: MutableRefObject<HTMLInputElement>,
+    businessLatitudeRef: MutableRefObject<HTMLInputElement>,
+    businessLongitudeRef: MutableRefObject<HTMLInputElement>,
+    businessFormOverlayRef: MutableRefObject<HTMLDivElement>
+}
+
+const WorldMap = function (
+    {
+        businessAddressRef,
+        businessLatitudeRef,
+        businessLongitudeRef,
+        businessFormOverlayRef
+    }: Props
+) {
     return (
         <main className="map" id="map">
             <MapContainer
@@ -21,7 +35,12 @@ const WorldMap = function ({ businessFormRefs }: MapProps) {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <WorldMapSearchAddressField businessFormRefs={businessFormRefs} />
+                <WorldMapSearchAddressField
+                    businessAddressRef={businessAddressRef}
+                    businessLatitudeRef={businessLatitudeRef}
+                    businessLongitudeRef={businessLongitudeRef}
+                    businessFormOverlayRef={businessFormOverlayRef}
+                />
             </MapContainer>
         </main>
     );

@@ -1,16 +1,19 @@
+import { ChangeEventHandler } from "react";
 import "../styles/ReviewFormStar.scss";
 
 interface Props {
-    grade: string
+    grade: string,
+    onGradeChange: ChangeEventHandler<HTMLInputElement>
 }
 
-const ReviewFormStar = function ({ grade }: Props) {
+const ReviewFormStar = function ({ grade, onGradeChange }: Props) {
     return (
         <>
             <input
                 type="radio"
                 name="reviewStar"
                 id={'reviewStar' + grade}
+                onChange={onGradeChange}
                 value={grade}
             />
             <label

@@ -1,0 +1,26 @@
+@import './common/functions';
+@import './common/constants';
+
+.app-form-overlay {
+    display: flex;
+    align-items: center;
+    background-color: get-color('overlay');
+    position: absolute;
+    top: 0;
+    z-index: 314159;
+    height: 100vh;
+    width: 100vw;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity $review-form-transition-time ease-in;
+
+    &--hidden {
+        visibility: hidden;
+        height: 0;
+    }
+
+    &--fadeout {
+        opacity: 0;
+        transition: opacity $review-form-transition-time ease-in;
+    }
+}

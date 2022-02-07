@@ -37,14 +37,16 @@ const SideNav = function ({ userName, profilePictureSrc }: Props) {
                 {userName}
             </p>
             <hr className="side-navbar__separator" />
-            {Object.entries(SIDE_NAV_ACTIONS).map(([key, value], index) => {
-                return <SideNavAction
-                    deactivatedNavClassName={deactivatedNavClassName}
-                    icon={<value.icon />}
-                    actionRoute={value.actionRoute}
-                    actionName={value.actionName}
-                    key={key}
-                />
+            {SIDE_NAV_ACTIONS.map(action => {
+                return (
+                    <SideNavAction
+                        deactivatedNavClassName={deactivatedNavClassName}
+                        icon={<action.icon />}
+                        actionRoute={action.actionRoute}
+                        actionName={action.actionName}
+                        key={action.actionName}
+                    />
+                )
             })}
         </nav>
     );

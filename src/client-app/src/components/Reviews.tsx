@@ -21,11 +21,13 @@ const Reviews = function () {
 
     return (
         <main id="reviews">
-            {reviews.map((review) => (
-                <a href="/" key={review.id}>
-                    {review.reviewTitle}
-                </a>
-            ))}
+            {reviews.map(review => {
+                return (
+                    <a href="/" key={review.id}>
+                        {review.reviewTitle}
+                    </a>
+                )
+            })}
         </main>
     );
 };

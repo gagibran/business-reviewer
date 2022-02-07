@@ -124,8 +124,15 @@ const BusinessForm = function (
                     required
                 >
                     <option value=""></option>
-                    {BUSINESS_TYPES.map((name, index) => {
-                        return <option key={index} value={name}>{name}</option>
+                    {BUSINESS_TYPES.map(name => {
+                        return (
+                            <option
+                                key={name}
+                                value={name}
+                            >
+                                {name}
+                            </option>
+                        )
                     })}
                 </select>
                 <button type="submit" onClick={submitButtonHandler}>

@@ -3,7 +3,7 @@ import ReviewForm from "./ReviewForm";
 import SideNav from "./SideNav";
 import WorldMap from "./WorldMap";
 import { MutableRefObject, useRef } from "react";
-import { v4 } from "uuid";
+import { v4 } from "uuid"; // Delete after adding proper DB querying.
 import "../styles/App.scss";
 
 const App = function () {
@@ -20,15 +20,15 @@ const App = function () {
                 profilePictureSrc="https://images.unsplash.com/photo-1619895862022-09114b41f16f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
             />
             <BusinessForm
-                userId={v4()}
+                userId={v4()} // This will come from the DB later on.
                 businessAddressRef={businessAddressRef}
                 businessLatitudeRef={businessLatitudeRef}
                 businessLongitudeRef={businessLongitudeRef}
                 businessFormOverlayRef={businessFormOverlayRef}
             />
             <ReviewForm
-                reviewerId={v4()}
-                businessId={v4()}
+                reviewerId={v4()} // This will come from the DB later on.
+                businessId={v4()} // This will come from the DB later on.
             />
             <WorldMap
                 businessAddressRef={businessAddressRef}

@@ -132,7 +132,7 @@ const BusinessForm = function (
                             >
                                 {name}
                             </option>
-                        )
+                        );
                     })}
                 </select>
                 <button type="submit" onClick={submitButtonHandler}>

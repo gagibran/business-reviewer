@@ -46,7 +46,7 @@ const SideNav = function ({ userName, profilePictureSrc }: Props) {
                         actionName={action.actionName}
                         key={action.actionName}
                     />
-                )
+                );
             })}
         </nav>
     );

@@ -26,7 +26,7 @@ const Reviews = function () {
                     <a href="/" key={review.id}>
                         {review.reviewTitle}
                     </a>
-                )
+                );
             })}
         </main>
     );

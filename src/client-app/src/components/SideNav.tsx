@@ -1,8 +1,8 @@
 import SideNavAction from "./SideNavAction";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useState } from "react";
-import "../styles/SideNav.scss";
 import { SIDE_NAV_ACTIONS } from "../common/constants/sideNav";
+import "../styles/SideNav.scss";
 
 interface Props {
     userName: string,

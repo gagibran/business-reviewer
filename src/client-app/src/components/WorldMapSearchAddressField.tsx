@@ -1,12 +1,12 @@
 // More information: https://github.com/smeijer/leaflet-geosearch#using-with-react-leaflet
 
+import LeafletLocationEvent from "../common/interfaces/leafletExtentions";
 import { MutableRefObject, useEffect } from "react"
 import { useMap } from "react-leaflet"
 import { EsriProvider, GeoSearchControl } from "leaflet-geosearch"
 import { defaultMarkerIcon } from "../common/constants/defaultMarkerIcon"
-import "leaflet-geosearch/assets/css/leaflet.css"
-import LeafletLocationEvent from "../common/interfaces/leafletExtentions";
 import { LeafletEvent } from "leaflet"
+import "leaflet-geosearch/assets/css/leaflet.css"
 
 interface Props {
     businessAddressRef: MutableRefObject<HTMLInputElement>,

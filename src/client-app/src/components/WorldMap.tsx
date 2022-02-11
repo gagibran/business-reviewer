@@ -2,9 +2,9 @@
 
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import WorldMapSearchAddressField from "./WorldMapSearchAddressField";
-import "../styles/WorldMap.scss";
-import "leaflet/dist/leaflet.css";
 import { MutableRefObject } from "react";
+import "leaflet/dist/leaflet.css";
+import "../styles/WorldMap.scss";
 
 interface Props {
     businessAddressRef: MutableRefObject<HTMLInputElement>,

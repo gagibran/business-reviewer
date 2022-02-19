@@ -1,4 +1,5 @@
 import SideNavAction from "./SideNavAction";
+import { createPortal } from "react-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useState } from "react";
 import { SIDE_NAV_ACTIONS } from "../common/constants/sideNav";
@@ -14,7 +15,7 @@ const SideNav = function ({ userName, profilePictureSrc }: Props) {
     const [navbar, setNavbar] = useState(false);
     const deactivatedNavClassName = !navbar ? '--deactivated' : '';
 
-    return (
+    return createPortal(
         <nav className={'side-navbar' + deactivatedNavClassName}>
             <AiOutlineArrowLeft
                 className={'side-navbar__arrow' + deactivatedNavClassName}
@@ -48,7 +49,8 @@ const SideNav = function ({ userName, profilePictureSrc }: Props) {
                     />
                 );
             })}
-        </nav>
+        </nav>,
+        document.getElementById('sideNav') as HTMLElement
     );
 };
 

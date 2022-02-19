@@ -1,7 +1,7 @@
 // More information: https://github.com/PaulLeCam/react-leaflet#react-leaflet-
 
-import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import WorldMapSearchAddressField from "./WorldMapSearchAddressField";
+import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
 import { MutableRefObject } from "react";
 import "leaflet/dist/leaflet.css";
 import "../styles/WorldMap.scss";
@@ -22,7 +22,7 @@ const WorldMap = function (
     }: Props
 ) {
     return (
-        <main className="map" id="map">
+        <section className="map">
             <MapContainer
                 className="map__map-container"
                 center={[51.5072, 0.1276]}
@@ -42,7 +42,7 @@ const WorldMap = function (
                     businessFormOverlayRef={businessFormOverlayRef}
                 />
             </MapContainer>
-        </main>
+        </section>
     );
 };
 

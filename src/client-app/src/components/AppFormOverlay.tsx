@@ -4,12 +4,11 @@ import { animateOverlayFadeout } from "../common/functions/functions";
 import "../styles/AppFormOverlay.scss";
 
 interface Props {
-    id: string,
     overlayRef: MutableRefObject<HTMLDivElement>,
     children: ReactChild
 }
 
-const AppFormOverlay = function ({ id, overlayRef, children }: Props) {
+const AppFormOverlay = function ({ overlayRef, children }: Props) {
     const onOverlayClose = function (e: ReactMouseEvent<HTMLDivElement, MouseEvent>) {
         if (e.target === overlayRef.current) {
             animateOverlayFadeout(
@@ -23,7 +22,6 @@ const AppFormOverlay = function ({ id, overlayRef, children }: Props) {
 
     return (
         <div
-            id={id}
             className="app-form-overlay app-form-overlay--fadeout app-form-overlay--hidden"
             ref={overlayRef}
             onClick={onOverlayClose}

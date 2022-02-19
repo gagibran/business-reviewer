@@ -1,10 +1,10 @@
-import BusinessForm from "./BusinessForm";
-import ReviewForm from "./ReviewForm";
-import SideNav from "./SideNav";
-import WorldMap from "./WorldMap";
+import BusinessForm from "./components/BusinessForm";
+import ReviewForm from "./components/ReviewForm";
+import SideNav from "./components/SideNav";
+import WorldMap from "./components/WorldMap";
 import { MutableRefObject, useRef } from "react";
 import { v4 } from "uuid"; // Delete after adding proper DB querying.
-import "../styles/App.scss";
+import "./styles/App.scss";
 
 const App = function () {
     const businessFormOverlayRef = useRef() as MutableRefObject<HTMLDivElement>;

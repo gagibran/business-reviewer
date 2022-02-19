@@ -6,6 +6,7 @@ import { TIMEOUT } from "../common/constants/form";
 import { animateOverlayFadeout } from "../common/functions/functions";
 import { reviewsRequests } from "../api/requests";
 import "../styles/AppForm.scss";
+import { createPortal } from "react-dom";
 
 interface Props {
     reviewerId: string,
@@ -69,8 +70,8 @@ const ReviewForm = function ({ reviewerId, businessId }: Props) {
         );
     };
 
-    return (
-        <AppFormOverlay id="reviewFormOverlay" overlayRef={reviewFormOverlayRef}>
+    return createPortal(
+        <AppFormOverlay overlayRef={reviewFormOverlayRef}>
             <form
                 id="reviewForm"
                 className="app-form"
@@ -121,7 +122,8 @@ const ReviewForm = function ({ reviewerId, businessId }: Props) {
                 />
                 <button type="submit">Submit</button>
             </form>
-        </AppFormOverlay>
+        </AppFormOverlay>,
+        document.getElementById('modals') as HTMLElement
     );
 };
 

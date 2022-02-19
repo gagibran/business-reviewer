@@ -5,6 +5,7 @@ import { BUSINESS_TYPES, TIMEOUT } from "../common/constants/form";
 import { ChangeEvent, MutableRefObject, useState } from "react";
 import { businessesRequests } from "../api/requests";
 import "../styles/AppForm.scss";
+import { createPortal } from "react-dom";
 
 interface Props {
     userId: string,
@@ -76,8 +77,8 @@ const BusinessForm = function (
         );
     };
 
-    return (
-        <AppFormOverlay id="businessFormOverlay" overlayRef={businessFormOverlayRef}>
+    return createPortal(
+        <AppFormOverlay overlayRef={businessFormOverlayRef}>
             <form
                 id="businessForm"
                 className="app-form"
@@ -139,7 +140,8 @@ const BusinessForm = function (
                     Submit
                 </button>
             </form>
-        </AppFormOverlay>
+        </AppFormOverlay>,
+        document.getElementById('modals') as HTMLElement
     );
 };
 
